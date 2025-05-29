@@ -1,0 +1,6 @@
+@ShepherdsPies_HostAddress = http://localhost:5182
+
+GET {{ShepherdsPies_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
