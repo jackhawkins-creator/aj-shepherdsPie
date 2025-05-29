@@ -20,7 +20,7 @@ public class PizzaController : ControllerBase
 
     //GET all toppings 
     [HttpGet("toppings")]
-    //[Authorize]
+    [Authorize]
     public IActionResult GetAllToppings()
     {
         return Ok(_dbContext.Toppings.ToList());
@@ -28,7 +28,7 @@ public class PizzaController : ControllerBase
 
     //GET single pizza by id expand with topping
     [HttpGet("{id}")]
-    //[Authorize]
+    [Authorize]
     public IActionResult GetPizzaById(int id)
     {
         return Ok(_dbContext.Pizzas.Include(p => p.Size)
@@ -41,7 +41,7 @@ public class PizzaController : ControllerBase
 
     //DELETE single Pizza
     [HttpDelete("{id}")]
-    //[Authorize]
+    [Authorize]
     public IActionResult DeletePizza(int id)
     {
         Pizza pizza = _dbContext.Pizzas.SingleOrDefault(p => p.Id == id);
@@ -55,5 +55,30 @@ public class PizzaController : ControllerBase
         _dbContext.SaveChanges();
 
         return NoContent();
+    }
+
+    //GET All Sauces
+    [HttpGet("sauces")]
+    //[Authorize]
+    public IActionResult GetAllSauces()
+    {
+        return Ok(_dbContext.Sauces.ToList());
+    }
+
+
+    //GET All Sizes
+    [HttpGet("sizes")]
+    //[Authorize]
+    public IActionResult GetAllSizes()
+    {
+        return Ok(_dbContext.Sizes.ToList());
+    }
+
+    //GET All Cheeses
+    [HttpGet("cheeses")]
+    //[Authorize]
+    public IActionResult GetAllCheeses()
+    {
+        return Ok(_dbContext.Cheeses.ToList());
     }
 }

@@ -12,8 +12,8 @@ using ShepherdsPies.Data;
 namespace ShepherdsPies.Migrations
 {
     [DbContext(typeof(ShepherdsPiesDbContext))]
-    [Migration("20250529163827_initial")]
-    partial class initial
+    [Migration("20250529204230_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -144,15 +144,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ad962f00-68ed-4705-ab81-65993de97874",
+                            ConcurrencyStamp = "ae78a9c5-eb1b-4c86-a4ab-16b8398559ed",
                             Email = "admin@shepherdspies.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SHEPHERDSPIES.COM",
                             NormalizedUserName = "ADMIN@SHEPHERDSPIES.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBl2WG5DCasFa/rtjP8NAsg9GEJD1qkt2E+KPlGWSgrw8PHGlIQjfPAsEgwljYZGEw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJy3MxKcl622jPNtlzpFfCTxLQvKo0AjJMQt7diqcScAv/AJGSvz56Tl0YMtM1BFIA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dcbed5eb-80ff-4fe1-9b7e-d666ef21f5e6",
+                            SecurityStamp = "23cc0e98-f6a2-4e3b-8441-0d0134afa7f8",
                             TwoFactorEnabled = false,
                             UserName = "admin@shepherdspies.com"
                         });
@@ -259,12 +259,22 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Mozzarella"
+                            Name = "Buffalo Mozzarella"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Cheddar"
+                            Name = "Four Cheese"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Vegan"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "None"
                         });
                 });
 
@@ -306,6 +316,20 @@ namespace ShepherdsPies.Migrations
                             Email = "jane@sp.com",
                             Name = "Jane Smith",
                             Password = "pass456"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "carlos@sp.com",
+                            Name = "Carlos Rivera",
+                            Password = "secure123"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Email = "emily@sp.com",
+                            Name = "Emily Zhang",
+                            Password = "password321"
                         });
                 });
 
@@ -337,18 +361,42 @@ namespace ShepherdsPies.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DelivererId");
+
+                    b.HasIndex("OrderTakerId");
+
                     b.ToTable("Orders");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 5, 29, 16, 38, 27, 533, DateTimeKind.Utc).AddTicks(8299),
-                            DelivererId = 2,
+                            CreatedAt = new DateTime(2025, 5, 29, 20, 42, 29, 828, DateTimeKind.Utc).AddTicks(2420),
+                            DelivererId = 1,
                             IsDelivered = false,
                             OrderTakerId = 1,
                             TableNum = 3,
                             Tip = 5.00m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 5, 29, 20, 12, 29, 828, DateTimeKind.Utc).AddTicks(2429),
+                            DelivererId = 3,
+                            IsDelivered = true,
+                            OrderTakerId = 2,
+                            TableNum = 5,
+                            Tip = 3.00m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 5, 29, 19, 12, 29, 828, DateTimeKind.Utc).AddTicks(2437),
+                            DelivererId = 4,
+                            IsDelivered = true,
+                            OrderTakerId = 1,
+                            TableNum = 7,
+                            Tip = 7.50m
                         });
                 });
 
@@ -374,6 +422,14 @@ namespace ShepherdsPies.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CheeseId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("SauceId");
+
+                    b.HasIndex("SizeId");
+
                     b.ToTable("Pizzas");
 
                     b.HasData(
@@ -383,6 +439,30 @@ namespace ShepherdsPies.Migrations
                             CheeseId = 1,
                             OrderId = 1,
                             SauceId = 1,
+                            SizeId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CheeseId = 2,
+                            OrderId = 2,
+                            SauceId = 2,
+                            SizeId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CheeseId = 3,
+                            OrderId = 2,
+                            SauceId = 3,
+                            SizeId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CheeseId = 4,
+                            OrderId = 3,
+                            SauceId = 4,
                             SizeId = 2
                         });
                 });
@@ -403,6 +483,10 @@ namespace ShepherdsPies.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PizzaId");
+
+                    b.HasIndex("ToppingId");
+
                     b.ToTable("PizzaToppings");
 
                     b.HasData(
@@ -417,6 +501,42 @@ namespace ShepherdsPies.Migrations
                             Id = 2,
                             PizzaId = 1,
                             ToppingId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            PizzaId = 2,
+                            ToppingId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            PizzaId = 2,
+                            ToppingId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            PizzaId = 3,
+                            ToppingId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            PizzaId = 3,
+                            ToppingId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            PizzaId = 4,
+                            ToppingId = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            PizzaId = 4,
+                            ToppingId = 8
                         });
                 });
 
@@ -440,12 +560,22 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Tomato"
+                            Name = "Marinara"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Alfredo"
+                            Name = "Arrabbiata"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Garlic White"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "None"
                         });
                 });
 
@@ -506,14 +636,50 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Pepperoni",
-                            Price = 1.25m
+                            Name = "Sausage",
+                            Price = 0.50m
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Mushrooms",
-                            Price = 1.00m
+                            Name = "Pepperoni",
+                            Price = 0.50m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Mushroom",
+                            Price = 0.50m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Onion",
+                            Price = 0.50m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Green Pepper",
+                            Price = 0.50m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Black Olive",
+                            Price = 0.50m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Basil",
+                            Price = 0.50m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Extra Cheese",
+                            Price = 0.50m
                         });
                 });
 
@@ -609,6 +775,75 @@ namespace ShepherdsPies.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ShepherdsPies.Models.Order", b =>
+                {
+                    b.HasOne("ShepherdsPies.Models.Employee", "Deliverer")
+                        .WithMany()
+                        .HasForeignKey("DelivererId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShepherdsPies.Models.Employee", "OrderTaker")
+                        .WithMany()
+                        .HasForeignKey("OrderTakerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Deliverer");
+
+                    b.Navigation("OrderTaker");
+                });
+
+            modelBuilder.Entity("ShepherdsPies.Models.Pizza", b =>
+                {
+                    b.HasOne("ShepherdsPies.Models.Cheese", "Cheese")
+                        .WithMany()
+                        .HasForeignKey("CheeseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShepherdsPies.Models.Order", null)
+                        .WithMany("Pizzas")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShepherdsPies.Models.Sauce", "Sauce")
+                        .WithMany()
+                        .HasForeignKey("SauceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShepherdsPies.Models.Size", "Size")
+                        .WithMany()
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cheese");
+
+                    b.Navigation("Sauce");
+
+                    b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("ShepherdsPies.Models.PizzaTopping", b =>
+                {
+                    b.HasOne("ShepherdsPies.Models.Pizza", null)
+                        .WithMany("PizzaToppings")
+                        .HasForeignKey("PizzaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShepherdsPies.Models.Topping", "Topping")
+                        .WithMany()
+                        .HasForeignKey("ToppingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Topping");
+                });
+
             modelBuilder.Entity("ShepherdsPies.Models.UserProfile", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
@@ -618,6 +853,16 @@ namespace ShepherdsPies.Migrations
                         .IsRequired();
 
                     b.Navigation("IdentityUser");
+                });
+
+            modelBuilder.Entity("ShepherdsPies.Models.Order", b =>
+                {
+                    b.Navigation("Pizzas");
+                });
+
+            modelBuilder.Entity("ShepherdsPies.Models.Pizza", b =>
+                {
+                    b.Navigation("PizzaToppings");
                 });
 #pragma warning restore 612, 618
         }
