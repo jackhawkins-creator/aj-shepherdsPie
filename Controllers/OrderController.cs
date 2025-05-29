@@ -20,7 +20,7 @@ public class OrderController : ControllerBase
 
     //GET all Orders
     [HttpGet]
-    //[Authorize]
+    [Authorize]
     public IActionResult GetAllOrders()
     {
         return Ok(_dbContext.Orders.Include(o => o.OrderTaker)
@@ -33,7 +33,7 @@ public class OrderController : ControllerBase
 
     //GET single Order
     [HttpGet("{id}")]
-    //[Authorize]
+    [Authorize]
     public IActionResult GetOrderById(int id)
     {
         return Ok(_dbContext.Orders.Include(o => o.OrderTaker)
@@ -52,7 +52,7 @@ public class OrderController : ControllerBase
 
     //DELETE single Order
     [HttpDelete("{id}")]
-    //[Authorize]
+    [Authorize]
     public IActionResult DeleteOrder(int id)
     {
         Order order = _dbContext.Orders.SingleOrDefault(o => o.Id == id);
