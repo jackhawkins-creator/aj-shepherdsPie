@@ -7,4 +7,8 @@ public class PizzaDTO
     public int SizeId { get; set; }
     public int CheeseId { get; set; }
     public int SauceId { get; set; }
+    public List<PizzaToppingDTO> PizzaToppings { get; set; }
+    public SauceDTO Sauce { get; set; }
+    public CheeseDTO Cheese { get; set; }
+    public SizeDTO Size { get; set; }
 }

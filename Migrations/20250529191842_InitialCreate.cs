@@ -82,54 +82,6 @@ namespace ShepherdsPies.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Tip = table.Column<decimal>(type: "numeric", nullable: false),
-                    OrderTakerId = table.Column<int>(type: "integer", nullable: false),
-                    DelivererId = table.Column<int>(type: "integer", nullable: false),
-                    TableNum = table.Column<int>(type: "integer", nullable: false),
-                    IsDelivered = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PizzaToppings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PizzaId = table.Column<int>(type: "integer", nullable: false),
-                    ToppingId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PizzaToppings", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Pizzas",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    OrderId = table.Column<int>(type: "integer", nullable: false),
-                    SizeId = table.Column<int>(type: "integer", nullable: false),
-                    CheeseId = table.Column<int>(type: "integer", nullable: false),
-                    SauceId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pizzas", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Sauces",
                 columns: table => new
                 {
@@ -297,10 +249,88 @@ namespace ShepherdsPies.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Tip = table.Column<decimal>(type: "numeric", nullable: false),
+                    OrderTakerId = table.Column<int>(type: "integer", nullable: false),
+                    DelivererId = table.Column<int>(type: "integer", nullable: false),
+                    TableNum = table.Column<int>(type: "integer", nullable: false),
+                    IsDelivered = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Employees_DelivererId",
+                        column: x => x.DelivererId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_Employees_OrderTakerId",
+                        column: x => x.OrderTakerId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pizzas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    OrderId = table.Column<int>(type: "integer", nullable: false),
+                    SizeId = table.Column<int>(type: "integer", nullable: false),
+                    CheeseId = table.Column<int>(type: "integer", nullable: false),
+                    SauceId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pizzas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pizzas_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PizzaToppings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PizzaId = table.Column<int>(type: "integer", nullable: false),
+                    ToppingId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PizzaToppings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PizzaToppings_Pizzas_PizzaId",
+                        column: x => x.PizzaId,
+                        principalTable: "Pizzas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PizzaToppings_Toppings_ToppingId",
+                        column: x => x.ToppingId,
+                        principalTable: "Toppings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "85c260b0-3c88-4ed6-8060-7550ec15be9e", "admin@shepherdspies.com", true, false, null, "ADMIN@SHEPHERDSPIES.COM", "ADMIN@SHEPHERDSPIES.COM", "AQAAAAIAAYagAAAAEMOhMXMDbuNqE18tnN9Q1PA24LKr8BigZUUYPMq/hYgMX7y56L1XAaoCkCKHCOwBaQ==", null, false, "d333e21c-25d4-40bf-9cb4-dbaa981cb568", false, "admin@shepherdspies.com" });
+                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "fc840397-5b81-4c1b-b9b9-ab85ce993c98", "admin@shepherdspies.com", true, false, null, "ADMIN@SHEPHERDSPIES.COM", "ADMIN@SHEPHERDSPIES.COM", "AQAAAAIAAYagAAAAEAsoo5IOKKu8wIyEC66VB5ykWY8SN4H+OSyArkOtf34aqoQErClwPz42U1yl3KWR4w==", null, false, "8907ab8d-2339-4d0a-98cb-f757aebbd266", false, "admin@shepherdspies.com" });
 
             migrationBuilder.InsertData(
                 table: "Cheeses",
@@ -319,25 +349,6 @@ namespace ShepherdsPies.Migrations
                     { 1, "john@sp.com", "John Doe", "pass123" },
                     { 2, "jane@sp.com", "Jane Smith", "pass456" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Orders",
-                columns: new[] { "Id", "CreatedAt", "DelivererId", "IsDelivered", "OrderTakerId", "TableNum", "Tip" },
-                values: new object[] { 1, new DateTime(2025, 5, 29, 15, 55, 37, 644, DateTimeKind.Utc).AddTicks(1483), 2, false, 1, 3, 5.00m });
-
-            migrationBuilder.InsertData(
-                table: "PizzaToppings",
-                columns: new[] { "Id", "PizzaId", "ToppingId" },
-                values: new object[,]
-                {
-                    { 1, 1, 1 },
-                    { 2, 1, 2 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Pizzas",
-                columns: new[] { "Id", "CheeseId", "OrderId", "SauceId", "SizeId" },
-                values: new object[] { 1, 1, 1, 1, 2 });
 
             migrationBuilder.InsertData(
                 table: "Sauces",
@@ -368,9 +379,28 @@ namespace ShepherdsPies.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "CreatedAt", "DelivererId", "IsDelivered", "OrderTakerId", "TableNum", "Tip" },
+                values: new object[] { 1, new DateTime(2025, 5, 29, 19, 18, 42, 622, DateTimeKind.Utc).AddTicks(5662), 1, false, 1, 3, 5.00m });
+
+            migrationBuilder.InsertData(
                 table: "UserProfiles",
                 columns: new[] { "Id", "Address", "FirstName", "IdentityUserId", "LastName" },
                 values: new object[] { 1, "101 Main Street", "Admina", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", "Strator" });
+
+            migrationBuilder.InsertData(
+                table: "Pizzas",
+                columns: new[] { "Id", "CheeseId", "OrderId", "SauceId", "SizeId" },
+                values: new object[] { 1, 1, 1, 1, 2 });
+
+            migrationBuilder.InsertData(
+                table: "PizzaToppings",
+                columns: new[] { "Id", "PizzaId", "ToppingId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 1, 2 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -410,6 +440,31 @@ namespace ShepherdsPies.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_DelivererId",
+                table: "Orders",
+                column: "DelivererId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_OrderTakerId",
+                table: "Orders",
+                column: "OrderTakerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PizzaToppings_PizzaId",
+                table: "PizzaToppings",
+                column: "PizzaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PizzaToppings_ToppingId",
+                table: "PizzaToppings",
+                column: "ToppingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pizzas_OrderId",
+                table: "Pizzas",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_IdentityUserId",
                 table: "UserProfiles",
                 column: "IdentityUserId");
@@ -437,16 +492,7 @@ namespace ShepherdsPies.Migrations
                 name: "Cheeses");
 
             migrationBuilder.DropTable(
-                name: "Employees");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
                 name: "PizzaToppings");
-
-            migrationBuilder.DropTable(
-                name: "Pizzas");
 
             migrationBuilder.DropTable(
                 name: "Sauces");
@@ -455,16 +501,25 @@ namespace ShepherdsPies.Migrations
                 name: "Sizes");
 
             migrationBuilder.DropTable(
-                name: "Toppings");
-
-            migrationBuilder.DropTable(
                 name: "UserProfiles");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Pizzas");
+
+            migrationBuilder.DropTable(
+                name: "Toppings");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
         }
     }
 }
