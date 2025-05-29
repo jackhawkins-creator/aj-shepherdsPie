@@ -63,7 +63,7 @@ public class ShepherdsPiesDbContext : IdentityDbContext<IdentityUser>
                 CreatedAt = DateTime.UtcNow,
                 Tip = 5.00m,
                 OrderTakerId = 1,
-                DelivererId = 2,
+                DelivererId = 1,
                 TableNum = 3,
                 IsDelivered = false
             }

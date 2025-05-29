@@ -141,15 +141,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "85c260b0-3c88-4ed6-8060-7550ec15be9e",
+                            ConcurrencyStamp = "fc840397-5b81-4c1b-b9b9-ab85ce993c98",
                             Email = "admin@shepherdspies.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SHEPHERDSPIES.COM",
                             NormalizedUserName = "ADMIN@SHEPHERDSPIES.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMOhMXMDbuNqE18tnN9Q1PA24LKr8BigZUUYPMq/hYgMX7y56L1XAaoCkCKHCOwBaQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAsoo5IOKKu8wIyEC66VB5ykWY8SN4H+OSyArkOtf34aqoQErClwPz42U1yl3KWR4w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d333e21c-25d4-40bf-9cb4-dbaa981cb568",
+                            SecurityStamp = "8907ab8d-2339-4d0a-98cb-f757aebbd266",
                             TwoFactorEnabled = false,
                             UserName = "admin@shepherdspies.com"
                         });
@@ -334,14 +334,18 @@ namespace ShepherdsPies.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DelivererId");
+
+                    b.HasIndex("OrderTakerId");
+
                     b.ToTable("Orders");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 5, 29, 15, 55, 37, 644, DateTimeKind.Utc).AddTicks(1483),
-                            DelivererId = 2,
+                            CreatedAt = new DateTime(2025, 5, 29, 19, 18, 42, 622, DateTimeKind.Utc).AddTicks(5662),
+                            DelivererId = 1,
                             IsDelivered = false,
                             OrderTakerId = 1,
                             TableNum = 3,
@@ -371,6 +375,8 @@ namespace ShepherdsPies.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrderId");
+
                     b.ToTable("Pizzas");
 
                     b.HasData(
@@ -399,6 +405,10 @@ namespace ShepherdsPies.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PizzaId");
+
+                    b.HasIndex("ToppingId");
 
                     b.ToTable("PizzaToppings");
 
@@ -606,6 +616,51 @@ namespace ShepherdsPies.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ShepherdsPies.Models.Order", b =>
+                {
+                    b.HasOne("ShepherdsPies.Models.Employee", "Deliverer")
+                        .WithMany()
+                        .HasForeignKey("DelivererId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShepherdsPies.Models.Employee", "OrderTaker")
+                        .WithMany()
+                        .HasForeignKey("OrderTakerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Deliverer");
+
+                    b.Navigation("OrderTaker");
+                });
+
+            modelBuilder.Entity("ShepherdsPies.Models.Pizza", b =>
+                {
+                    b.HasOne("ShepherdsPies.Models.Order", null)
+                        .WithMany("Pizzas")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ShepherdsPies.Models.PizzaTopping", b =>
+                {
+                    b.HasOne("ShepherdsPies.Models.Pizza", null)
+                        .WithMany("PizzaToppings")
+                        .HasForeignKey("PizzaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShepherdsPies.Models.Topping", "Topping")
+                        .WithMany()
+                        .HasForeignKey("ToppingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Topping");
+                });
+
             modelBuilder.Entity("ShepherdsPies.Models.UserProfile", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
@@ -615,6 +670,16 @@ namespace ShepherdsPies.Migrations
                         .IsRequired();
 
                     b.Navigation("IdentityUser");
+                });
+
+            modelBuilder.Entity("ShepherdsPies.Models.Order", b =>
+                {
+                    b.Navigation("Pizzas");
+                });
+
+            modelBuilder.Entity("ShepherdsPies.Models.Pizza", b =>
+                {
+                    b.Navigation("PizzaToppings");
                 });
 #pragma warning restore 612, 618
         }
