@@ -12,7 +12,7 @@ using ShepherdsPies.Data;
 namespace ShepherdsPies.Migrations
 {
     [DbContext(typeof(ShepherdsPiesDbContext))]
-    [Migration("20250529204230_InitialCreate")]
+    [Migration("20250530151810_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -144,15 +144,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ae78a9c5-eb1b-4c86-a4ab-16b8398559ed",
+                            ConcurrencyStamp = "9dc4a5b5-ef36-4ad4-b89b-77225e1d1b0f",
                             Email = "admin@shepherdspies.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SHEPHERDSPIES.COM",
                             NormalizedUserName = "ADMIN@SHEPHERDSPIES.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJy3MxKcl622jPNtlzpFfCTxLQvKo0AjJMQt7diqcScAv/AJGSvz56Tl0YMtM1BFIA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAW6vLhE+AGgJSLtumePp50cWO3Jkloce+5pQisjQTNkuN7WGspOEeScRIDS6/ZcmQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "23cc0e98-f6a2-4e3b-8441-0d0134afa7f8",
+                            SecurityStamp = "3a40b8df-2bb1-407a-8bc7-a49c45166627",
                             TwoFactorEnabled = false,
                             UserName = "admin@shepherdspies.com"
                         });
@@ -371,7 +371,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 5, 29, 20, 42, 29, 828, DateTimeKind.Utc).AddTicks(2420),
+                            CreatedAt = new DateTime(2025, 5, 30, 15, 18, 9, 443, DateTimeKind.Utc).AddTicks(519),
                             DelivererId = 1,
                             IsDelivered = false,
                             OrderTakerId = 1,
@@ -381,7 +381,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 5, 29, 20, 12, 29, 828, DateTimeKind.Utc).AddTicks(2429),
+                            CreatedAt = new DateTime(2025, 5, 30, 14, 48, 9, 443, DateTimeKind.Utc).AddTicks(542),
                             DelivererId = 3,
                             IsDelivered = true,
                             OrderTakerId = 2,
@@ -391,7 +391,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 5, 29, 19, 12, 29, 828, DateTimeKind.Utc).AddTicks(2437),
+                            CreatedAt = new DateTime(2025, 5, 30, 13, 48, 9, 443, DateTimeKind.Utc).AddTicks(566),
                             DelivererId = 4,
                             IsDelivered = true,
                             OrderTakerId = 1,
