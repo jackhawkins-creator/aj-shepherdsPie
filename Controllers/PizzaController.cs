@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using ShepherdsPies.Data;
 using ShepherdsPies.Models;
+using ShepherdsPies.Models.DTOs;
 
 namespace ShepherdsPies.Controllers;
 
@@ -28,7 +29,7 @@ public class PizzaController : ControllerBase
 
     //GET single pizza by id expand with topping
     [HttpGet("{id}")]
-    [Authorize]
+    //[Authorize]
     public IActionResult GetPizzaById(int id)
     {
         return Ok(_dbContext.Pizzas.Include(p => p.Size)
@@ -37,6 +38,40 @@ public class PizzaController : ControllerBase
         .Include(p => p.PizzaToppings)
             .ThenInclude(pt => pt.Topping)
         .FirstOrDefault(p => p.Id == id));
+    }
+    // POST add pizza to order
+    [HttpPost]
+    //[Authorize]
+    public IActionResult CreatePizza(Pizza pizza)
+    {
+        // Validate foreign key references
+        Order order = _dbContext.Orders.FirstOrDefault(o => o.Id == pizza.OrderId);
+        Size size = _dbContext.Sizes.FirstOrDefault(s => s.Id == pizza.SizeId);
+        Cheese cheese = _dbContext.Cheeses.FirstOrDefault(c => c.Id == pizza.CheeseId);
+        Sauce sauce = _dbContext.Sauces.FirstOrDefault(s => s.Id == pizza.SauceId);
+        if (order == null || size == null || cheese == null || sauce == null)
+        {
+            return BadRequest("Invalid OrderId, SizeId, CheeseId, or SauceId.");
+        }
+        // Clear navigation properties to avoid EF tracking issues
+        pizza.Sauce = null;
+        pizza.Cheese = null;
+        pizza.Size = null;
+        if (pizza.PizzaToppings != null)
+        {
+            foreach (PizzaTopping topping in pizza.PizzaToppings)
+            {
+                Topping validTopping = _dbContext.Toppings.FirstOrDefault(t => t.Id == topping.ToppingId);
+                if (validTopping == null)
+                {
+                    return BadRequest($"Invalid ToppingId: {topping.ToppingId}");
+                }
+                topping.Topping = null;
+            }
+        }
+        _dbContext.Pizzas.Add(pizza);
+        _dbContext.SaveChanges();
+        return Created($"/api/pizza/{pizza.Id}", pizza);
     }
 
     //DELETE single Pizza
@@ -54,6 +89,31 @@ public class PizzaController : ControllerBase
         _dbContext.Pizzas.Remove(pizza);
         _dbContext.SaveChanges();
 
+        return NoContent();
+    }
+    // PUT update pizza 
+    [HttpPut("{id}")]
+    //[Authorize]
+    public IActionResult UpdatePizza(int id, Pizza pizza)
+    {
+        Pizza existingPizza = _dbContext.Pizzas
+               .Include(p => p.PizzaToppings)
+               .FirstOrDefault(p => p.Id == id);
+
+        existingPizza.OrderId = pizza.OrderId;
+        existingPizza.SizeId = pizza.SizeId;
+        existingPizza.CheeseId = pizza.CheeseId;
+        existingPizza.SauceId = pizza.SauceId;
+
+        _dbContext.PizzaToppings.RemoveRange(existingPizza.PizzaToppings);
+
+        existingPizza.PizzaToppings = pizza.PizzaToppings.Select(pt => new PizzaTopping
+        {
+            PizzaId = id,
+            ToppingId = pt.ToppingId
+        }).ToList();
+
+        _dbContext.SaveChanges();
         return NoContent();
     }
 

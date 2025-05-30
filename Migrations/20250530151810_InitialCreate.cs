@@ -348,7 +348,7 @@ namespace ShepherdsPies.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "ae78a9c5-eb1b-4c86-a4ab-16b8398559ed", "admin@shepherdspies.com", true, false, null, "ADMIN@SHEPHERDSPIES.COM", "ADMIN@SHEPHERDSPIES.COM", "AQAAAAIAAYagAAAAEJy3MxKcl622jPNtlzpFfCTxLQvKo0AjJMQt7diqcScAv/AJGSvz56Tl0YMtM1BFIA==", null, false, "23cc0e98-f6a2-4e3b-8441-0d0134afa7f8", false, "admin@shepherdspies.com" });
+                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "9dc4a5b5-ef36-4ad4-b89b-77225e1d1b0f", "admin@shepherdspies.com", true, false, null, "ADMIN@SHEPHERDSPIES.COM", "ADMIN@SHEPHERDSPIES.COM", "AQAAAAIAAYagAAAAEAW6vLhE+AGgJSLtumePp50cWO3Jkloce+5pQisjQTNkuN7WGspOEeScRIDS6/ZcmQ==", null, false, "3a40b8df-2bb1-407a-8bc7-a49c45166627", false, "admin@shepherdspies.com" });
 
             migrationBuilder.InsertData(
                 table: "Cheeses",
@@ -413,9 +413,9 @@ namespace ShepherdsPies.Migrations
                 columns: new[] { "Id", "CreatedAt", "DelivererId", "IsDelivered", "OrderTakerId", "TableNum", "Tip" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 5, 29, 20, 42, 29, 828, DateTimeKind.Utc).AddTicks(2420), 1, false, 1, 3, 5.00m },
-                    { 2, new DateTime(2025, 5, 29, 20, 12, 29, 828, DateTimeKind.Utc).AddTicks(2429), 3, true, 2, 5, 3.00m },
-                    { 3, new DateTime(2025, 5, 29, 19, 12, 29, 828, DateTimeKind.Utc).AddTicks(2437), 4, true, 1, 7, 7.50m }
+                    { 1, new DateTime(2025, 5, 30, 15, 18, 9, 443, DateTimeKind.Utc).AddTicks(519), 1, false, 1, 3, 5.00m },
+                    { 2, new DateTime(2025, 5, 30, 14, 48, 9, 443, DateTimeKind.Utc).AddTicks(542), 3, true, 2, 5, 3.00m },
+                    { 3, new DateTime(2025, 5, 30, 13, 48, 9, 443, DateTimeKind.Utc).AddTicks(566), 4, true, 1, 7, 7.50m }
                 });
 
             migrationBuilder.InsertData(
