@@ -33,7 +33,7 @@ public class OrderController : ControllerBase
 
     //GET single Order
     [HttpGet("{id}")]
-    //[Authorize]
+    [Authorize]
     public IActionResult GetOrderById(int id)
     {
         return Ok(_dbContext.Orders.Include(o => o.OrderTaker)
@@ -70,7 +70,7 @@ public class OrderController : ControllerBase
 
     // PUT update Order 
     [HttpPut("{id}")]
-    //[Authorize]
+    [Authorize]
     public IActionResult UpdateOrder(int id, Order order)
     {
         Order existingOrder = _dbContext.Orders
@@ -100,7 +100,7 @@ public class OrderController : ControllerBase
 
     // POST: Create a new order
     [HttpPost]
-    //[Authorize]
+    [Authorize]
     public IActionResult CreateOrder(Order order)
     {
         order.CreatedAt = DateTime.Now;
