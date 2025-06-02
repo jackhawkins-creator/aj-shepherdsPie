@@ -136,7 +136,7 @@ public class PizzaController : ControllerBase
 
     //GET All Cheeses
     [HttpGet("cheeses")]
-    //[Authorize]
+    [Authorize]
     public IActionResult GetAllCheeses()
     {
         return Ok(_dbContext.Cheeses.ToList());

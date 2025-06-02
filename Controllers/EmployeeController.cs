@@ -19,7 +19,7 @@ public class EmployeeController : ControllerBase
     }
     //GET all employees
     [HttpGet]
-    //[Authorize]
+    [Authorize]
     public IActionResult GetAllEmployees()
     {
         return Ok(_dbContext.Employees.ToList());

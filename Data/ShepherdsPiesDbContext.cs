@@ -59,37 +59,58 @@ public class ShepherdsPiesDbContext : IdentityDbContext<IdentityUser>
         );
 
         modelBuilder.Entity<Order>().HasData(
-            new Order
-            {
-                Id = 1,
-                CreatedAt = DateTime.UtcNow,
-                Tip = 5.00m,
-                OrderTakerId = 1,
-                DelivererId = 1,
-                TableNum = 3,
-                IsDelivered = false
-            },
-            new Order
-            {
-                Id = 2,
-                CreatedAt = DateTime.UtcNow.AddMinutes(-30),
-                Tip = 3.00m,
-                OrderTakerId = 2,
-                DelivererId = 3,
-                TableNum = 5,
-                IsDelivered = true
-            },
-            new Order
-            {
-                Id = 3,
-                CreatedAt = DateTime.UtcNow.AddMinutes(-90),
-                Tip = 7.50m,
-                OrderTakerId = 1,
-                DelivererId = 4,
-                TableNum = 7,
-                IsDelivered = true
-            }
-        );
+    new Order
+    {
+        Id = 1,
+        CreatedAt = DateTime.UtcNow, // Now
+        Tip = 5.00m,
+        OrderTakerId = 1,
+        DelivererId = 1,
+        TableNum = 3,
+        IsDelivered = false
+    },
+    new Order
+    {
+        Id = 2,
+        CreatedAt = DateTime.UtcNow.AddDays(-1), // Yesterday
+        Tip = 3.00m,
+        OrderTakerId = 2,
+        DelivererId = 3,
+        TableNum = 5,
+        IsDelivered = true
+    },
+    new Order
+    {
+        Id = 3,
+        CreatedAt = DateTime.UtcNow.AddDays(-3), // 3 days ago
+        Tip = 7.50m,
+        OrderTakerId = 1,
+        DelivererId = 4,
+        TableNum = 7,
+        IsDelivered = true
+    },
+    new Order
+    {
+        Id = 4,
+        CreatedAt = DateTime.UtcNow.AddDays(-10), // 10 days ago
+        Tip = 4.25m,
+        OrderTakerId = 3,
+        DelivererId = 2,
+        TableNum = 2,
+        IsDelivered = false
+    },
+    new Order
+    {
+        Id = 5,
+        CreatedAt = DateTime.UtcNow.AddDays(-30), // 1 month ago
+        Tip = 6.00m,
+        OrderTakerId = 4,
+        DelivererId = 1,
+        TableNum = 1,
+        IsDelivered = true
+    }
+);
+
 
         modelBuilder.Entity<Size>().HasData(
             new Size { Id = 1, Name = "Small" },
