@@ -3,6 +3,8 @@ import { AuthorizedRoute } from "./auth/AuthorizedRoute";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import HomePage from "./HomePage";
+import CreateOrder from "./CreateOrder";
+import CreatePizza from "./CreatePizza";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -23,6 +25,22 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         <Route
           path="register"
           element={<Register setLoggedInUser={setLoggedInUser} />}
+        />
+        <Route
+          path="order/create"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <CreateOrder loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path="pizza/create"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <CreatePizza />
+            </AuthorizedRoute>
+          }
         />
       </Route>
       <Route path="*" element={<p>Whoops, nothing here...</p>} />

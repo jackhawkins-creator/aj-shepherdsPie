@@ -1,12 +1,21 @@
 const _apiUrl = "/api/pizza";
 
 export const getAllToppings = () => {
-    return fetch(`${_apiUrl}/toppings`).then((res)=>res.json());
+  return fetch(`${_apiUrl}/toppings`)
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to fetch toppings");
+      return res.json();
+    });
 };
 
 export const getAllSauces = () => {
-    return fetch(`${_apiUrl}/sauces`).then((res)=>res.json());
+  return fetch(`${_apiUrl}/sauces`)
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to fetch sauces");
+      return res.json();
+    });
 };
+
 
 export const getAllSizes = () => {
     return fetch(`${_apiUrl}/sizes`).then((res)=>res.json());
@@ -25,7 +34,7 @@ export const createPizza = (pizza) => {
     return fetch(_apiUrl, {
         method: "POST",
         headers: {
-            "Content-Types": "application/json",
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(pizza),
     }).then((res)=> res.json());
@@ -41,8 +50,14 @@ export const updatePizza = (pizza) => {
     return fetch(`${_apiUrl}/${pizza.id}`, {
         method: "PUT",
         headers: {
-            "Content-Types": "application/json",
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(pizza),
     });
+};
+
+export const getPizzasByOrderId = (orderId) => {
+  return fetch(`/api/order/${orderId}`)
+    .then(res => res.json())
+    .then(order => order.pizzas);
 };

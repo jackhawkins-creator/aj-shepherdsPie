@@ -18,7 +18,7 @@ export const createOrder = (order) => {
      return fetch(_apiUrl, {
         method: "POST",
         headers: {
-            "Content-Types": "application/json",
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(order),
     }).then((res)=> res.json());
@@ -28,7 +28,7 @@ export const updateOrder = (order) => {
     return fetch(`${_apiUrl}/${order.id}`, {
         method: "PUT",
         headers: {
-            "Content-Types": "application/json",
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(order),
     });
