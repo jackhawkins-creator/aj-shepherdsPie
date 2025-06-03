@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { deleteOrder, getAllOrders } from "../managers/orderManager";
 import { useNavigate } from "react-router-dom";
+import { createOrder } from "../managers/orderManager";
 
-export default function HomePage() {
+
+export default function HomePage({loggedInUser}) {
   const [orders, setOrders] = useState([]);
   const [filterDate, setFilterDate] = useState("");
   const navigate = useNavigate();
@@ -22,6 +24,26 @@ export default function HomePage() {
       });
     }
   };
+const handleCreateOrder = () => {
+  const newOrder = {
+    orderTakerId: loggedInUser.id,
+    tip: 0,
+    delivererId: null,     
+    tableNum: null,        
+    pizzas: []             
+  };
+
+  console.log("Creating order:", newOrder);
+
+  createOrder(newOrder)
+    .then((createdOrder) => {
+      navigate("/order/create", { state: { orderId: createdOrder.id } });
+    })
+    .catch((error) => {
+      console.error("Failed to create order:", error);
+    });
+};
+
 
   const filteredOrders = orders.filter((order) => {
     if (!filterDate) return true;
@@ -42,18 +64,51 @@ export default function HomePage() {
         onChange={(event) => setFilterDate(event.target.value)}
       ></input>
       <h6>Orders</h6>
-      <ul>
-        {filteredOrders.map((order) => (
-          <li key={order.id}>
-            order #{order.id}
-            <button onClick={() => navigate(`/order/edit/{order.id}`)}>
-              Edit Order
-            </button>
-            <button onClick={() => handleDelete(order.id)}>Cancel Order</button>
-          </li>
-        ))}
-      </ul>
-      <button onClick={() => navigate(`/order/create`)}>Create Order</button>
+       <ul>
+  {filteredOrders.map((order) => (
+    <li key={order.id} style={{ marginBottom: "1rem" }}>
+      <strong>Order #{order.id}</strong>
+      <div>Order Taker: {order.orderTaker?.firstName} {order.orderTaker?.lastName}</div>
+      
+      {order.tableNum !== null ? (
+        <div>Table #: {order.tableNum}</div>
+      ) : (
+        <div>Delivery Driver: {order.deliverer?.firstName} {order.deliverer?.lastName}</div>
+      )}
+
+      <div>
+        <strong>Pizzas:</strong>
+        <ul>
+          {order.pizzas.map((pizza, index) => (
+            <li key={pizza.id}>
+              Pizza #{index + 1}: 
+              Size - {pizza.size?.name}, 
+              Cheese - {pizza.cheese?.name}, 
+              Sauce - {pizza.sauce?.name}
+              <br />
+              Toppings:{" "}
+              {pizza.pizzaToppings.length > 0
+                ? pizza.pizzaToppings.map((pt) => pt.topping?.name).join(", ")
+                : "None"}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <button onClick={() => navigate(`/order/edit/${order.id}`)}>
+        Edit Order
+      </button>
+      <button onClick={() => handleDelete(order.id)}>
+        Cancel Order
+      </button>
+    </li>
+  ))}
+</ul>
+
+
+<button className="btn btn-primary" onClick={handleCreateOrder}>
+        Create Order
+      </button>
     </div>
   );
 }

@@ -1,5 +1,8 @@
-const _apiUrl = "/api/employees";
+const _apiUrl = "http://localhost:5001/api/employees";
 
 export const getAllEmployees = () => {
-    return fetch(_apiUrl).then((res)=>res.json());
+    return fetch(_apiUrl, {
+  credentials: "include"
+}).then((res) => res.json());
+
 };

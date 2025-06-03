@@ -6,6 +6,7 @@ import NavBar from "../components/NavBar";
 import ApplicationViews from "../components/ApplicationViews";
 import { tryGetLoggedInUser } from "../managers/authManager";
 
+
 function App() {
   const [loggedInUser, setLoggedInUser] = useState();
 
