@@ -41,22 +41,20 @@ export default function HomePage({ loggedInUser }) {
         onChange={(event) => setFilterDate(event.target.value)}
       />
       <h6>Orders</h6>
-      <ul>
-        {filteredOrders.map((order) => (
-          <li key={order.id} style={{ marginBottom: "1rem" }}>
-            <strong>Order #{order.id}</strong>
-            <button onClick={() => navigate("/pizza/create", { state: { orderId: order.id } })}>
-              Add Pizza
-            </button>
-            <div>
-              Order Taker: {loggedInUser.firstName} {loggedInUser.lastName}
-            </div>
-
-            {order.tableNum !== null ? (
-              <div>Table #: {order.tableNum}</div>
-            ) : (
-              <div>Delivery Driver: {loggedInUser.firstName} {loggedInUser.lastName}</div>
-            )}
+       <ul>
+  {filteredOrders.map((order) => (
+    <li key={order.id} style={{ marginBottom: "1rem" }}>
+      <strong>Order #{order.id}</strong>
+      <button onClick={() => navigate("/pizza/create", { state: { orderId: order.id } })}>
+      Add Pizza
+    </button>
+      <div>Order Taker: {loggedInUser.firstName} {loggedInUser.lastName}</div>
+      
+      {order.tableNum !== null ? (
+        <div>Table #: {order.tableNum}</div>
+      ) : (
+        <div>Delivery Driver: {order.deliverer?.firstName} {order.deliverer?.lastName}</div>
+      )}
 
             <div>
               <strong>Pizzas:</strong>
