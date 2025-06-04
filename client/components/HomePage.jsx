@@ -48,6 +48,9 @@ export default function HomePage({loggedInUser}) {
   {filteredOrders.map((order) => (
     <li key={order.id} style={{ marginBottom: "1rem" }}>
       <strong>Order #{order.id}</strong>
+      <button onClick={() => navigate("/pizza/create", { state: { orderId: order.id } })}>
+      Add Pizza
+    </button>
       <div>Order Taker: {loggedInUser.firstName} {loggedInUser.lastName}</div>
       
       {order.tableNum !== null ? (

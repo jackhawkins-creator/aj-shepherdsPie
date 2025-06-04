@@ -7,9 +7,9 @@ public class Order
     public decimal Tip { get; set; }
     public int OrderTakerId { get; set; }
     public UserProfile? OrderTaker { get; set; }
-    public int DelivererId { get; set; }
+    public int? DelivererId { get; set; }
     public UserProfile? Deliverer { get; set; }
-    public int TableNum { get; set; }
+    public int? TableNum { get; set; }
     public bool IsDelivered { get; set; }
     public List<Pizza> Pizzas { get; set; }
 }
