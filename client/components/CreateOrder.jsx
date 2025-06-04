@@ -117,9 +117,9 @@ export default function CreateOrder({ loggedInUser }) {
             {pizzas.map((pizza, index) => (
               <li key={pizza.id || index}>
                 Pizza #{index + 1}: Size -{" "}
-                {pizza.size?.name || `Size ID ${pizza.sizeId}`}, Cheese -{" "}
-                {pizza.cheese?.name || `Cheese ID ${pizza.cheeseId}`}, Sauce -{" "}
-                {pizza.sauce?.name || `Sauce ID ${pizza.sauceId}`}
+                {pizza.size?.name || `ID: ${pizza.sizeId}`}, Cheese -{" "}
+                {pizza.cheese?.name || `ID: ${pizza.cheeseId}`}, Sauce -{" "}
+                {pizza.sauce?.name || `ID: ${pizza.sauceId}`}
                 <br />
                 Toppings:{" "}
                 {pizza.pizzaToppings && pizza.pizzaToppings.length > 0
@@ -132,12 +132,16 @@ export default function CreateOrder({ loggedInUser }) {
                       .join(", ")
                   : "None"}
                 <br />
-                <button onClick={() => navigate(`/pizza/edit/${pizza.id}`)}>
-                  Edit
-                </button>
-                <button onClick={() => handleRemovePizza(pizza.id)}>
-                  Remove
-                </button>
+                {pizza.id && (
+                  <>
+                    <button onClick={() => navigate(`/pizza/edit/${pizza.id}`)}>
+                      Edit
+                    </button>
+                    <button onClick={() => handleRemovePizza(pizza.id)}>
+                      Remove
+                    </button>
+                  </>
+                )}
               </li>
             ))}
           </ul>
