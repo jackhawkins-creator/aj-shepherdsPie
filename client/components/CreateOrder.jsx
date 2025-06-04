@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getAllEmployees } from "../managers/employeeManager";
+import { getAllUserProfiles } from "../managers/userProfileManager";
 import { updateOrder, createOrder } from "../managers/orderManager";
 import { getPizzasByOrderId } from "../managers/pizzaManager";
 
 export default function CreateOrder({ loggedInUser }) {
   const [isDelivery, setIsDelivery] = useState(false);
-  const [employees, setEmployees] = useState([]);
+  const [userProfiles, setUserProfiles] = useState([]);
   const [selectedDelivererId, setSelectedDelivererId] = useState("");
   const [tableNumber, setTableNumber] = useState("");
   const [tip, setTip] = useState(0);
@@ -17,12 +17,20 @@ export default function CreateOrder({ loggedInUser }) {
   const location = useLocation();
 
   useEffect(() => {
-  if (location.state?.pizzas) {
-    setPizzas(location.state.pizzas);
-  } else if (location.state?.newPizza) {
-    setPizzas(prev => [...prev, location.state.newPizza]);
-  }
-}, [location.state]);
+    getAllUserProfiles().then(setUserProfiles);
+
+    const passedOrderId = location.state?.orderId;
+    const newPizza = location.state?.newPizza;
+
+    if (passedOrderId) {
+      setOrderId(passedOrderId);
+      getPizzasByOrderId(passedOrderId).then(setPizzas);
+    }
+
+    if (newPizza) {
+      setPizzas((prev) => [...prev, newPizza]);
+    }
+  }, [location.state]);
 
   const handleRemovePizza = (pizzaId) => {
     setPizzas((prev) => prev.filter((p) => p.id !== pizzaId));
@@ -79,9 +87,9 @@ export default function CreateOrder({ loggedInUser }) {
           onChange={(e) => setSelectedDelivererId(e.target.value)}
         >
           <option value="">Select Driver</option>
-          {employees.map((e) => (
-            <option key={e.id} value={e.id}>
-              {e.name}
+          {userProfiles.map((u) => (
+            <option key={u.id} value={u.id}>
+              {u.firstName} { u.lastName}
             </option>
           ))}
         </select>
