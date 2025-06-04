@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getAllUserProfiles } from "../managers/userProfileManager";
-import { updateOrder, createOrder } from "../managers/orderManager";
+import {  createOrder } from "../managers/orderManager";
 
 export default function CreateOrder({ loggedInUser }) {
   const [isDelivery, setIsDelivery] = useState(false);
@@ -10,7 +10,7 @@ export default function CreateOrder({ loggedInUser }) {
   const [tableNumber, setTableNumber] = useState("");
   const [tip, setTip] = useState(0);
   const [pizzas, setPizzas] = useState([]);
-  const [orderId, setOrderId] = useState(null);
+  const [ orderId, setOrderId] = useState(null);
 
   const navigate = useNavigate();
   const location = useLocation();
