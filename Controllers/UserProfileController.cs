@@ -9,20 +9,20 @@ namespace ShepherdsPies.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 
-public class EmployeeController : ControllerBase
+public class UserProfileController : ControllerBase
 {
     private ShepherdsPiesDbContext _dbContext;
 
-    public EmployeeController(ShepherdsPiesDbContext context)
+    public UserProfileController(ShepherdsPiesDbContext context)
     {
         _dbContext = context;
     }
-    //GET all employees
+    //GET allUserProfiles
     [HttpGet]
     [Authorize]
-    public IActionResult GetAllEmployees()
+    public IActionResult GetAllUserProfiles()
     {
-        return Ok(_dbContext.Employees.ToList());
+        return Ok(_dbContext.UserProfiles.ToList());
     }
 }
 

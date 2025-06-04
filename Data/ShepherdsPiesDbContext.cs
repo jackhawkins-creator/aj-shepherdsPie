@@ -10,7 +10,6 @@ public class ShepherdsPiesDbContext : IdentityDbContext<IdentityUser>
     private readonly IConfiguration _configuration;
 
     public DbSet<UserProfile> UserProfiles { get; set; }
-    public DbSet<Employee> Employees { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<Pizza> Pizzas { get; set; }
     public DbSet<PizzaTopping> PizzaToppings { get; set; }
@@ -48,15 +47,42 @@ public class ShepherdsPiesDbContext : IdentityDbContext<IdentityUser>
             IdentityUserId = adminId,
             FirstName = "Admina",
             LastName = "Strator",
-            Address = "101 Main Street",
-        });
+            Address = "101 Main Street"
+        },
+    new UserProfile
+    {
+        Id = 2,
+        IdentityUserId = "user-id-2",
+        FirstName = "Tony",
+        LastName = "Rigatoni",
+        Address = "22 Pasta Lane"
+    },
+    new UserProfile
+    {
+        Id = 3,
+        IdentityUserId = "user-id-3",
+        FirstName = "Lucia",
+        LastName = "Marinara",
+        Address = "303 Olive Blvd"
+    },
+    new UserProfile
+    {
+        Id = 4,
+        IdentityUserId = "user-id-4",
+        FirstName = "Gino",
+        LastName = "Calzone",
+        Address = "44 Parmesan Ave"
+    },
+    new UserProfile
+    {
+        Id = 5,
+        IdentityUserId = "user-id-5",
+        FirstName = "Sofia",
+        LastName = "Pizzetti",
+        Address = "505 Mozzarella Dr"
+    }
+);
 
-        modelBuilder.Entity<Employee>().HasData(
-            new Employee { Id = 1, Name = "John Doe", Email = "john@sp.com", Password = "pass123" },
-            new Employee { Id = 2, Name = "Jane Smith", Email = "jane@sp.com", Password = "pass456" },
-            new Employee { Id = 3, Name = "Carlos Rivera", Email = "carlos@sp.com", Password = "secure123" },
-            new Employee { Id = 4, Name = "Emily Zhang", Email = "emily@sp.com", Password = "password321" }
-        );
 
         modelBuilder.Entity<Order>().HasData(
     new Order

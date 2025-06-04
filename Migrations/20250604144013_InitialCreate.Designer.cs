@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ShepherdsPies.Data;
@@ -11,9 +12,11 @@ using ShepherdsPies.Data;
 namespace ShepherdsPies.Migrations
 {
     [DbContext(typeof(ShepherdsPiesDbContext))]
-    partial class ShepherdsPiesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250604144013_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,15 +144,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dee5393e-6883-41f9-85dc-3e28bff1695a",
+                            ConcurrencyStamp = "93b3c6aa-eec6-43d0-9b88-91e5204c2f0d",
                             Email = "admin@shepherdspies.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SHEPHERDSPIES.COM",
                             NormalizedUserName = "ADMIN@SHEPHERDSPIES.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBaG/ot5+uyfEjCasLpkk1bBqU23HJMy+cHDwZs544w/IUrVmb+P0qgc2jjfJjMhEg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMWA12GUyTgLudCNVYEN0gBakz2w9nSN6W5kmSg64kiiShxcjaXIXO9zY4cR/5pYew==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9d176dec-d97a-483c-ae38-ec5f4edafdf3",
+                            SecurityStamp = "5c8d7457-3436-4589-9a59-9c94b805869e",
                             TwoFactorEnabled = false,
                             UserName = "admin@shepherdspies.com"
                         });
@@ -368,7 +371,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 4, 15, 6, 54, 536, DateTimeKind.Utc).AddTicks(6046),
+                            CreatedAt = new DateTime(2025, 6, 4, 14, 40, 12, 563, DateTimeKind.Utc).AddTicks(4375),
                             DelivererId = 1,
                             IsDelivered = false,
                             OrderTakerId = 1,
@@ -378,7 +381,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 3, 15, 6, 54, 536, DateTimeKind.Utc).AddTicks(6062),
+                            CreatedAt = new DateTime(2025, 6, 3, 14, 40, 12, 563, DateTimeKind.Utc).AddTicks(4383),
                             DelivererId = 3,
                             IsDelivered = true,
                             OrderTakerId = 2,
@@ -388,7 +391,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 1, 15, 6, 54, 536, DateTimeKind.Utc).AddTicks(6073),
+                            CreatedAt = new DateTime(2025, 6, 1, 14, 40, 12, 563, DateTimeKind.Utc).AddTicks(4391),
                             DelivererId = 4,
                             IsDelivered = true,
                             OrderTakerId = 1,
@@ -398,7 +401,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 5, 25, 15, 6, 54, 536, DateTimeKind.Utc).AddTicks(6075),
+                            CreatedAt = new DateTime(2025, 5, 25, 14, 40, 12, 563, DateTimeKind.Utc).AddTicks(4393),
                             DelivererId = 2,
                             IsDelivered = false,
                             OrderTakerId = 3,
@@ -408,7 +411,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 5, 5, 15, 6, 54, 536, DateTimeKind.Utc).AddTicks(6077),
+                            CreatedAt = new DateTime(2025, 5, 5, 14, 40, 12, 563, DateTimeKind.Utc).AddTicks(4395),
                             DelivererId = 1,
                             IsDelivered = true,
                             OrderTakerId = 4,
@@ -794,16 +797,16 @@ namespace ShepherdsPies.Migrations
 
             modelBuilder.Entity("ShepherdsPies.Models.Order", b =>
                 {
-                    b.HasOne("ShepherdsPies.Models.UserProfile", "Deliverer")
+                    b.HasOne("ShepherdsPies.Models.Employee", "Deliverer")
                         .WithMany()
                         .HasForeignKey("DelivererId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShepherdsPies.Models.UserProfile", "OrderTaker")
+                    b.HasOne("ShepherdsPies.Models.Employee", "OrderTaker")
                         .WithMany()
                         .HasForeignKey("OrderTakerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Deliverer");
