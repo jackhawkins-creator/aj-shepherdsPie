@@ -141,4 +141,54 @@ public class PizzaController : ControllerBase
     {
         return Ok(_dbContext.Cheeses.ToList());
     }
+
+    //GET single Sauce by id
+    [HttpGet("sauces/{id}")]
+    [Authorize]
+    public IActionResult GetSauceById(int id)
+    {
+        Sauce sauce = _dbContext.Sauces.FirstOrDefault(s => s.Id == id);
+        if (sauce == null)
+        {
+            return NotFound();
+        }
+        return Ok(sauce);
+    }
+    //GET single Size by id
+    [HttpGet("sizes/{id}")]
+    [Authorize]
+    public IActionResult GetSizeById(int id)
+    {
+        Size size = _dbContext.Sizes.FirstOrDefault(s => s.Id == id);
+        if (size == null)
+        {
+            return NotFound();
+        }
+        return Ok(size);
+    }
+    //GET single Cheese by id
+    [HttpGet("cheeses/{id}")]
+    [Authorize]
+    public IActionResult GetCheeseById(int id)
+    {
+        Cheese cheese = _dbContext.Cheeses.FirstOrDefault(c => c.Id == id);
+        if (cheese == null)
+        {
+            return NotFound();
+        }
+        return Ok(cheese);
+    }
+
+    [HttpGet("toppings/{id}")]
+    [Authorize]
+    public IActionResult GetToppingById(int id)
+    {
+        Topping topping = _dbContext.Toppings.FirstOrDefault(t => t.Id == id);
+        if (topping == null)
+        {
+            return NotFound();
+        }
+        return Ok(topping);
+    }
+
 }

@@ -61,3 +61,17 @@ export const getPizzasByOrderId = (orderId) => {
     .then(res => res.json())
     .then(order => order.pizzas);
 };
+
+export const getSizeById = (id) => {
+   return fetch(`${_apiUrl}/sizes/${id}`).then((res) => res.json());
+ };
+ export const getCheeseById = (id) => {
+   return fetch(`${_apiUrl}/cheeses/${id}`).then((res) => res.json());
+ };
+ export const getSauceById = (id) => {
+   return fetch(`${_apiUrl}/sauces/${id}`).then((res) => res.json());
+ };
+
+ export const getToppingById = (id) => {
+  return fetch(`/api/pizza/toppings/${id}`).then((res) => res.json());
+};
