@@ -100,6 +100,11 @@ public class PizzaController : ControllerBase
                .Include(p => p.PizzaToppings)
                .FirstOrDefault(p => p.Id == id);
 
+        if (existingPizza == null)
+        {
+            return NotFound();
+        }
+
         existingPizza.OrderId = pizza.OrderId;
         existingPizza.SizeId = pizza.SizeId;
         existingPizza.CheeseId = pizza.CheeseId;
@@ -116,6 +121,7 @@ public class PizzaController : ControllerBase
         _dbContext.SaveChanges();
         return NoContent();
     }
+
 
     //GET All Sauces
     [HttpGet("sauces")]

@@ -5,6 +5,7 @@ import Register from "./auth/Register";
 import HomePage from "./HomePage";
 import CreateOrder from "./CreateOrder";
 import CreatePizza from "./CreatePizza";
+import EditPizza from "./EditPizza";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -42,8 +43,17 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
+      <Route
+          path="pizza/edit/:pizzaId"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <EditPizza />
+            </AuthorizedRoute>
+          }
+        />
       </Route>
       <Route path="*" element={<p>Whoops, nothing here...</p>} />
+
     </Routes>
   );
 }
