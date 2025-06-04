@@ -39,7 +39,48 @@ public class ShepherdsPiesDbContext : IdentityDbContext<IdentityUser>
             EmailConfirmed = true,
             PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "Admin123!")
         };
-        modelBuilder.Entity<IdentityUser>().HasData(adminUser);
+        modelBuilder.Entity<IdentityUser>().HasData(adminUser,
+            new IdentityUser
+            {
+                Id = "user-id-2",
+                UserName = "tony@example.com",
+                NormalizedUserName = "TONY@EXAMPLE.COM",
+                Email = "tony@example.com",
+                NormalizedEmail = "TONY@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "P@ssword1")
+            },
+            new IdentityUser
+            {
+                Id = "user-id-3",
+                UserName = "lucia@example.com",
+                NormalizedUserName = "LUCIA@EXAMPLE.COM",
+                Email = "lucia@example.com",
+                NormalizedEmail = "LUCIA@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "P@ssword1")
+            },
+            new IdentityUser
+            {
+                Id = "user-id-4",
+                UserName = "gino@example.com",
+                NormalizedUserName = "GINO@EXAMPLE.COM",
+                Email = "gino@example.com",
+                NormalizedEmail = "GINO@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "P@ssword1")
+            },
+            new IdentityUser
+            {
+                Id = "user-id-5",
+                UserName = "sofia@example.com",
+                NormalizedUserName = "SOFIA@EXAMPLE.COM",
+                Email = "sofia@example.com",
+                NormalizedEmail = "SOFIA@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "P@ssword1")
+            }
+        );
 
         modelBuilder.Entity<UserProfile>().HasData(new UserProfile
         {

@@ -16,21 +16,13 @@ export default function CreateOrder({ loggedInUser }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    getAllUserProfiles().then(setUserProfiles);
-
-    const passedOrderId = location.state?.orderId;
-    const newPizza = location.state?.newPizza;
-
-    if (passedOrderId) {
-      setOrderId(passedOrderId);
-      getPizzasByOrderId(passedOrderId).then(setPizzas);
-    }
-
-    if (newPizza) {
-      setPizzas((prev) => [...prev, newPizza]);
-    }
-  }, [location.state]);
+   useEffect(() => {
+  if (location.state?.pizzas) {
+    setPizzas(location.state.pizzas);
+  } else if (location.state?.newPizza) {
+    setPizzas(prev => [...prev, location.state.newPizza]);
+  }
+}, [location.state]);
 
   const handleRemovePizza = (pizzaId) => {
     setPizzas((prev) => prev.filter((p) => p.id !== pizzaId));
