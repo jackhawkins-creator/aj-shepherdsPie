@@ -67,21 +67,6 @@ namespace ShepherdsPies.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employees",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employees", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Sauces",
                 columns: table => new
                 {
@@ -266,15 +251,15 @@ namespace ShepherdsPies.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Employees_DelivererId",
+                        name: "FK_Orders_UserProfiles_DelivererId",
                         column: x => x.DelivererId,
-                        principalTable: "Employees",
+                        principalTable: "UserProfiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Employees_OrderTakerId",
+                        name: "FK_Orders_UserProfiles_OrderTakerId",
                         column: x => x.OrderTakerId,
-                        principalTable: "Employees",
+                        principalTable: "UserProfiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -348,7 +333,14 @@ namespace ShepherdsPies.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "93b3c6aa-eec6-43d0-9b88-91e5204c2f0d", "admin@shepherdspies.com", true, false, null, "ADMIN@SHEPHERDSPIES.COM", "ADMIN@SHEPHERDSPIES.COM", "AQAAAAIAAYagAAAAEMWA12GUyTgLudCNVYEN0gBakz2w9nSN6W5kmSg64kiiShxcjaXIXO9zY4cR/5pYew==", null, false, "5c8d7457-3436-4589-9a59-9c94b805869e", false, "admin@shepherdspies.com" });
+                values: new object[,]
+                {
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "a780de5a-70cb-44e7-88a9-72344923e052", "admin@shepherdspies.com", true, false, null, "ADMIN@SHEPHERDSPIES.COM", "ADMIN@SHEPHERDSPIES.COM", "AQAAAAIAAYagAAAAEHXie4M0J2yoUDyT4/99YXcg5txSTFIHjhKPbinJZG2wtnch+wub72hn7rvBEeq28Q==", null, false, "35da9aa0-5254-4d64-9117-5381a545feea", false, "admin@shepherdspies.com" },
+                    { "user-id-2", 0, "546ef553-cce3-4b81-b21b-8cfeda8db631", "tony@example.com", true, false, null, "TONY@EXAMPLE.COM", "TONY@EXAMPLE.COM", "AQAAAAIAAYagAAAAEKuvRUQzukYvm43cCpWiMnPiVCJ540D985dXd+iPE30BdWyz1uTBKOz5tOgf70hA9w==", null, false, "e12969fe-26e9-41b6-a0a4-f81d0ceceb01", false, "tony@example.com" },
+                    { "user-id-3", 0, "554bb52d-30a9-4073-9327-01f8a8018205", "lucia@example.com", true, false, null, "LUCIA@EXAMPLE.COM", "LUCIA@EXAMPLE.COM", "AQAAAAIAAYagAAAAEHcF/elwcsK975ShmATB4Rqb1LUVKQBmqQyw0OBbBCWr1Ka02Coo343nfHMiSMzs1Q==", null, false, "c4db330e-9c43-48d4-ad16-8412b2e638e3", false, "lucia@example.com" },
+                    { "user-id-4", 0, "2af4b6e1-39c6-4afb-b4f6-d05e6ac0b3df", "gino@example.com", true, false, null, "GINO@EXAMPLE.COM", "GINO@EXAMPLE.COM", "AQAAAAIAAYagAAAAEF/OWoBuWeLC8BzYIIzrRQsaoVXrzPLxRTGuAk+GpUuQsVNCZFArfqUR5I8NlT4TMw==", null, false, "962802ef-64dd-4a95-8fd4-3dd002e2faae", false, "gino@example.com" },
+                    { "user-id-5", 0, "4450f2bb-3293-4131-b84d-a147f7764a8a", "sofia@example.com", true, false, null, "SOFIA@EXAMPLE.COM", "SOFIA@EXAMPLE.COM", "AQAAAAIAAYagAAAAEBOcH3L1m/GNP/0UqJrjgniUYdJPfDUChWbIDKeWFGpSp4pl92DzLfJIQ+onzul9AQ==", null, false, "16eaaea7-8310-461b-a792-c92bfb7f5252", false, "sofia@example.com" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Cheeses",
@@ -359,17 +351,6 @@ namespace ShepherdsPies.Migrations
                     { 2, "Four Cheese" },
                     { 3, "Vegan" },
                     { 4, "None" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Employees",
-                columns: new[] { "Id", "Email", "Name", "Password" },
-                values: new object[,]
-                {
-                    { 1, "john@sp.com", "John Doe", "pass123" },
-                    { 2, "jane@sp.com", "Jane Smith", "pass456" },
-                    { 3, "carlos@sp.com", "Carlos Rivera", "secure123" },
-                    { 4, "emily@sp.com", "Emily Zhang", "password321" }
                 });
 
             migrationBuilder.InsertData(
@@ -409,21 +390,28 @@ namespace ShepherdsPies.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "UserProfiles",
+                columns: new[] { "Id", "Address", "FirstName", "IdentityUserId", "LastName" },
+                values: new object[,]
+                {
+                    { 1, "101 Main Street", "Admina", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", "Strator" },
+                    { 2, "22 Pasta Lane", "Tony", "user-id-2", "Rigatoni" },
+                    { 3, "303 Olive Blvd", "Lucia", "user-id-3", "Marinara" },
+                    { 4, "44 Parmesan Ave", "Gino", "user-id-4", "Calzone" },
+                    { 5, "505 Mozzarella Dr", "Sofia", "user-id-5", "Pizzetti" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "CreatedAt", "DelivererId", "IsDelivered", "OrderTakerId", "TableNum", "Tip" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 6, 4, 14, 40, 12, 563, DateTimeKind.Utc).AddTicks(4375), 1, false, 1, 3, 5.00m },
-                    { 2, new DateTime(2025, 6, 3, 14, 40, 12, 563, DateTimeKind.Utc).AddTicks(4383), 3, true, 2, 5, 3.00m },
-                    { 3, new DateTime(2025, 6, 1, 14, 40, 12, 563, DateTimeKind.Utc).AddTicks(4391), 4, true, 1, 7, 7.50m },
-                    { 4, new DateTime(2025, 5, 25, 14, 40, 12, 563, DateTimeKind.Utc).AddTicks(4393), 2, false, 3, 2, 4.25m },
-                    { 5, new DateTime(2025, 5, 5, 14, 40, 12, 563, DateTimeKind.Utc).AddTicks(4395), 1, true, 4, 1, 6.00m }
+                    { 1, new DateTime(2025, 6, 4, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3814), 1, false, 1, 3, 5.00m },
+                    { 2, new DateTime(2025, 6, 3, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3825), 3, true, 2, 5, 3.00m },
+                    { 3, new DateTime(2025, 6, 1, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3831), 4, true, 1, 7, 7.50m },
+                    { 4, new DateTime(2025, 5, 25, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3832), 2, false, 3, 2, 4.25m },
+                    { 5, new DateTime(2025, 5, 5, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3833), 1, true, 4, 1, 6.00m }
                 });
-
-            migrationBuilder.InsertData(
-                table: "UserProfiles",
-                columns: new[] { "Id", "Address", "FirstName", "IdentityUserId", "LastName" },
-                values: new object[] { 1, "101 Main Street", "Admina", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", "Strator" });
 
             migrationBuilder.InsertData(
                 table: "Pizzas",
@@ -556,9 +544,6 @@ namespace ShepherdsPies.Migrations
                 name: "PizzaToppings");
 
             migrationBuilder.DropTable(
-                name: "UserProfiles");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -566,9 +551,6 @@ namespace ShepherdsPies.Migrations
 
             migrationBuilder.DropTable(
                 name: "Toppings");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Cheeses");
@@ -583,7 +565,10 @@ namespace ShepherdsPies.Migrations
                 name: "Sizes");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "UserProfiles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

@@ -141,17 +141,81 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dee5393e-6883-41f9-85dc-3e28bff1695a",
+                            ConcurrencyStamp = "a780de5a-70cb-44e7-88a9-72344923e052",
                             Email = "admin@shepherdspies.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SHEPHERDSPIES.COM",
                             NormalizedUserName = "ADMIN@SHEPHERDSPIES.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBaG/ot5+uyfEjCasLpkk1bBqU23HJMy+cHDwZs544w/IUrVmb+P0qgc2jjfJjMhEg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHXie4M0J2yoUDyT4/99YXcg5txSTFIHjhKPbinJZG2wtnch+wub72hn7rvBEeq28Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9d176dec-d97a-483c-ae38-ec5f4edafdf3",
+                            SecurityStamp = "35da9aa0-5254-4d64-9117-5381a545feea",
                             TwoFactorEnabled = false,
                             UserName = "admin@shepherdspies.com"
+                        },
+                        new
+                        {
+                            Id = "user-id-2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "546ef553-cce3-4b81-b21b-8cfeda8db631",
+                            Email = "tony@example.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TONY@EXAMPLE.COM",
+                            NormalizedUserName = "TONY@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKuvRUQzukYvm43cCpWiMnPiVCJ540D985dXd+iPE30BdWyz1uTBKOz5tOgf70hA9w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e12969fe-26e9-41b6-a0a4-f81d0ceceb01",
+                            TwoFactorEnabled = false,
+                            UserName = "tony@example.com"
+                        },
+                        new
+                        {
+                            Id = "user-id-3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "554bb52d-30a9-4073-9327-01f8a8018205",
+                            Email = "lucia@example.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "LUCIA@EXAMPLE.COM",
+                            NormalizedUserName = "LUCIA@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHcF/elwcsK975ShmATB4Rqb1LUVKQBmqQyw0OBbBCWr1Ka02Coo343nfHMiSMzs1Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c4db330e-9c43-48d4-ad16-8412b2e638e3",
+                            TwoFactorEnabled = false,
+                            UserName = "lucia@example.com"
+                        },
+                        new
+                        {
+                            Id = "user-id-4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2af4b6e1-39c6-4afb-b4f6-d05e6ac0b3df",
+                            Email = "gino@example.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GINO@EXAMPLE.COM",
+                            NormalizedUserName = "GINO@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF/OWoBuWeLC8BzYIIzrRQsaoVXrzPLxRTGuAk+GpUuQsVNCZFArfqUR5I8NlT4TMw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "962802ef-64dd-4a95-8fd4-3dd002e2faae",
+                            TwoFactorEnabled = false,
+                            UserName = "gino@example.com"
+                        },
+                        new
+                        {
+                            Id = "user-id-5",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4450f2bb-3293-4131-b84d-a147f7764a8a",
+                            Email = "sofia@example.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SOFIA@EXAMPLE.COM",
+                            NormalizedUserName = "SOFIA@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBOcH3L1m/GNP/0UqJrjgniUYdJPfDUChWbIDKeWFGpSp4pl92DzLfJIQ+onzul9AQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "16eaaea7-8310-461b-a792-c92bfb7f5252",
+                            TwoFactorEnabled = false,
+                            UserName = "sofia@example.com"
                         });
                 });
 
@@ -275,61 +339,6 @@ namespace ShepherdsPies.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ShepherdsPies.Models.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Employees");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "john@sp.com",
-                            Name = "John Doe",
-                            Password = "pass123"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Email = "jane@sp.com",
-                            Name = "Jane Smith",
-                            Password = "pass456"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Email = "carlos@sp.com",
-                            Name = "Carlos Rivera",
-                            Password = "secure123"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Email = "emily@sp.com",
-                            Name = "Emily Zhang",
-                            Password = "password321"
-                        });
-                });
-
             modelBuilder.Entity("ShepherdsPies.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -368,7 +377,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 4, 15, 6, 54, 536, DateTimeKind.Utc).AddTicks(6046),
+                            CreatedAt = new DateTime(2025, 6, 4, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3814),
                             DelivererId = 1,
                             IsDelivered = false,
                             OrderTakerId = 1,
@@ -378,7 +387,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 3, 15, 6, 54, 536, DateTimeKind.Utc).AddTicks(6062),
+                            CreatedAt = new DateTime(2025, 6, 3, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3825),
                             DelivererId = 3,
                             IsDelivered = true,
                             OrderTakerId = 2,
@@ -388,7 +397,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 1, 15, 6, 54, 536, DateTimeKind.Utc).AddTicks(6073),
+                            CreatedAt = new DateTime(2025, 6, 1, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3831),
                             DelivererId = 4,
                             IsDelivered = true,
                             OrderTakerId = 1,
@@ -398,7 +407,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 5, 25, 15, 6, 54, 536, DateTimeKind.Utc).AddTicks(6075),
+                            CreatedAt = new DateTime(2025, 5, 25, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3832),
                             DelivererId = 2,
                             IsDelivered = false,
                             OrderTakerId = 3,
@@ -408,7 +417,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 5, 5, 15, 6, 54, 536, DateTimeKind.Utc).AddTicks(6077),
+                            CreatedAt = new DateTime(2025, 5, 5, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3833),
                             DelivererId = 1,
                             IsDelivered = true,
                             OrderTakerId = 4,
@@ -738,6 +747,38 @@ namespace ShepherdsPies.Migrations
                             FirstName = "Admina",
                             IdentityUserId = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             LastName = "Strator"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "22 Pasta Lane",
+                            FirstName = "Tony",
+                            IdentityUserId = "user-id-2",
+                            LastName = "Rigatoni"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "303 Olive Blvd",
+                            FirstName = "Lucia",
+                            IdentityUserId = "user-id-3",
+                            LastName = "Marinara"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "44 Parmesan Ave",
+                            FirstName = "Gino",
+                            IdentityUserId = "user-id-4",
+                            LastName = "Calzone"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "505 Mozzarella Dr",
+                            FirstName = "Sofia",
+                            IdentityUserId = "user-id-5",
+                            LastName = "Pizzetti"
                         });
                 });
 
@@ -797,13 +838,13 @@ namespace ShepherdsPies.Migrations
                     b.HasOne("ShepherdsPies.Models.UserProfile", "Deliverer")
                         .WithMany()
                         .HasForeignKey("DelivererId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ShepherdsPies.Models.UserProfile", "OrderTaker")
                         .WithMany()
                         .HasForeignKey("OrderTakerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Deliverer");
