@@ -5,28 +5,27 @@ import {
   getAllSauces,
   getAllSizes,
   getAllToppings,
+  getSizeById,
+  getCheeseById,
+  getSauceById,
+  getToppingById,
 } from "../managers/pizzaManager";
 import { useNavigate, useLocation } from "react-router-dom";
-
 export default function CreatePizza() {
   const navigate = useNavigate();
   const location = useLocation();
-
   const [sizes, setSizes] = useState([]);
   const [cheeses, setCheeses] = useState([]);
   const [sauces, setSauces] = useState([]);
   const [toppings, setToppings] = useState([]);
-
   const orderId = location.state?.orderId;
   const previousPizzas = location.state?.pizzas || [];
-
   const [selectedPizza, setSelectedPizza] = useState({
     sizeId: null,
     cheeseId: null,
     sauceId: null,
     pizzaToppings: [],
   });
-
   useEffect(() => {
     getAllSizes().then(setSizes).catch(console.error);
     getAllCheeses().then(setCheeses).catch(console.error);
@@ -34,14 +33,13 @@ export default function CreatePizza() {
     getAllToppings().then(setToppings).catch(console.error);
   }, []);
 
+
     const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!selectedPizza.sizeId || !selectedPizza.cheeseId || !selectedPizza.sauceId) {
       alert("Please select a size, cheese, and sauce.");
       return;
     }
-
     const newPizza = {
       orderId: orderId, // might be null
       sizeId: selectedPizza.sizeId,
@@ -49,20 +47,37 @@ export default function CreatePizza() {
       sauceId: selectedPizza.sauceId,
       pizzaToppings: selectedPizza.pizzaToppings.map((id) => ({ toppingId: id })),
     };
-
     if (orderId) {
-      // ✅ Send to DB and navigate back with no need to store it locally
+      // :white_check_mark: Send to DB and navigate back with no need to store it locally
       createPizza(newPizza).then(() => {
         navigate("/order/create", { state: { orderId } });
       });
     } else {
-      // ✅ Just add to local memory
-      navigate("/order/create", {
-        state: {
-          pizzas: [...previousPizzas, newPizza],
-          newPizza,
-        },
-      });
+      // :white_check_mark: Just add to local memory
+Promise.all([
+  getSizeById(selectedPizza.sizeId),
+  getCheeseById(selectedPizza.cheeseId),
+  getSauceById(selectedPizza.sauceId),
+  ...selectedPizza.pizzaToppings.map((id) => getToppingById(id)),
+]).then(([size, cheese, sauce, ...toppingObjs]) => {
+  const newPizzaWithDetails = {
+    ...newPizza,
+    size,
+    cheese,
+    sauce,
+    pizzaToppings: toppingObjs.map((topping) => ({
+      toppingId: topping.id,
+      topping: topping,
+    })),
+  };
+  navigate("/order/create", {
+    state: {
+      pizzas: [...previousPizzas, newPizzaWithDetails],
+      newPizza: newPizzaWithDetails,
+    },
+  });
+});
+
     }
   };
 
@@ -76,10 +91,10 @@ export default function CreatePizza() {
     }));
   };
 
+  
   return (
     <form onSubmit={handleSubmit}>
       <h2>Create a Pizza</h2>
-
       <fieldset>
         <legend>Size</legend>
         {sizes.map((size) => (
@@ -97,7 +112,6 @@ export default function CreatePizza() {
           </label>
         ))}
       </fieldset>
-
       <fieldset>
         <legend>Sauce</legend>
         {sauces.map((sauce) => (
@@ -115,7 +129,6 @@ export default function CreatePizza() {
           </label>
         ))}
       </fieldset>
-
       <fieldset>
         <legend>Cheese</legend>
         {cheeses.map((cheese) => (
@@ -133,7 +146,6 @@ export default function CreatePizza() {
           </label>
         ))}
       </fieldset>
-
       <fieldset>
         <legend>Toppings</legend>
         {toppings.map((topping) => (
@@ -148,7 +160,6 @@ export default function CreatePizza() {
           </label>
         ))}
       </fieldset>
-
       <button type="submit">Confirm Pizza</button>
     </form>
   );

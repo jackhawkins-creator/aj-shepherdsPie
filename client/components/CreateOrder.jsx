@@ -17,12 +17,19 @@ export default function CreateOrder({ loggedInUser }) {
   const location = useLocation();
 
    useEffect(() => {
+  // Load pizzas from state if available
   if (location.state?.pizzas) {
     setPizzas(location.state.pizzas);
   } else if (location.state?.newPizza) {
-    setPizzas(prev => [...prev, location.state.newPizza]);
+    setPizzas((prev) => [...prev, location.state.newPizza]);
   }
+
+  // Load user profiles for delivery driver dropdown
+  getAllUserProfiles()
+    .then(setUserProfiles)
+    .catch((err) => console.error("Failed to fetch user profiles", err));
 }, [location.state]);
+
 
   const handleRemovePizza = (pizzaId) => {
     setPizzas((prev) => prev.filter((p) => p.id !== pizzaId));
