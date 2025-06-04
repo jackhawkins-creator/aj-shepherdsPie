@@ -45,16 +45,17 @@ export const deletePizza = (id) => {
         method: "DELETE"
     });
 };
-
 export const updatePizza = (pizza) => {
-    return fetch(`${_apiUrl}/${pizza.id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(pizza),
-    });
+  console.log("Updating pizza:", pizza); // 🔍 Log it
+  return fetch(`${_apiUrl}/${pizza.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pizza),
+  });
 };
+;
 
 export const getPizzasByOrderId = (orderId) => {
   return fetch(`/api/order/${orderId}`)
