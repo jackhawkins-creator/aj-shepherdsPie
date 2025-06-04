@@ -34,7 +34,7 @@ export default function CreatePizza() {
     getAllToppings().then(setToppings).catch(console.error);
   }, []);
 
-  const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!selectedPizza.sizeId || !selectedPizza.cheeseId || !selectedPizza.sauceId) {
@@ -43,30 +43,29 @@ export default function CreatePizza() {
     }
 
     const newPizza = {
-      orderId: orderId,
+      orderId: orderId, // might be null
       sizeId: selectedPizza.sizeId,
       cheeseId: selectedPizza.cheeseId,
       sauceId: selectedPizza.sauceId,
-      pizzaToppings: selectedPizza.pizzaToppings.map((id) => ({
-        toppingId: id,
-      })),
+      pizzaToppings: selectedPizza.pizzaToppings.map((id) => ({ toppingId: id })),
     };
 
-    console.log("Pizza to send:", newPizza);
-
     if (orderId) {
-      // Submit to database if order already exists
-      createPizza(newPizza).then(() => navigate("/order/create"));
+      // ✅ Send to DB and navigate back with no need to store it locally
+      createPizza(newPizza).then(() => {
+        navigate("/order/create", { state: { orderId } });
+      });
     } else {
-      // Just navigate back with new pizza in memory
+      // ✅ Just add to local memory
       navigate("/order/create", {
         state: {
-          newPizza,
           pizzas: [...previousPizzas, newPizza],
+          newPizza,
         },
       });
     }
   };
+
 
   const toggleTopping = (id) => {
     setSelectedPizza((prev) => ({

@@ -17,20 +17,12 @@ export default function CreateOrder({ loggedInUser }) {
   const location = useLocation();
 
   useEffect(() => {
-    getAllEmployees().then(setEmployees);
-
-    const passedOrderId = location.state?.orderId;
-    const newPizza = location.state?.newPizza;
-
-    if (passedOrderId) {
-      setOrderId(passedOrderId);
-      getPizzasByOrderId(passedOrderId).then(setPizzas);
-    }
-
-    if (newPizza) {
-      setPizzas((prev) => [...prev, newPizza]);
-    }
-  }, [location.state]);
+  if (location.state?.pizzas) {
+    setPizzas(location.state.pizzas);
+  } else if (location.state?.newPizza) {
+    setPizzas(prev => [...prev, location.state.newPizza]);
+  }
+}, [location.state]);
 
   const handleRemovePizza = (pizzaId) => {
     setPizzas((prev) => prev.filter((p) => p.id !== pizzaId));
@@ -117,9 +109,9 @@ export default function CreateOrder({ loggedInUser }) {
             {pizzas.map((pizza, index) => (
               <li key={pizza.id || index}>
                 Pizza #{index + 1}: Size -{" "}
-                {pizza.size?.name || `Size ID ${pizza.sizeId}`}, Cheese -{" "}
-                {pizza.cheese?.name || `Cheese ID ${pizza.cheeseId}`}, Sauce -{" "}
-                {pizza.sauce?.name || `Sauce ID ${pizza.sauceId}`}
+                {pizza.size?.name || `ID: ${pizza.sizeId}`}, Cheese -{" "}
+                {pizza.cheese?.name || `ID: ${pizza.cheeseId}`}, Sauce -{" "}
+                {pizza.sauce?.name || `ID: ${pizza.sauceId}`}
                 <br />
                 Toppings:{" "}
                 {pizza.pizzaToppings && pizza.pizzaToppings.length > 0
@@ -132,12 +124,16 @@ export default function CreateOrder({ loggedInUser }) {
                       .join(", ")
                   : "None"}
                 <br />
-                <button onClick={() => navigate(`/pizza/edit/${pizza.id}`)}>
-                  Edit
-                </button>
-                <button onClick={() => handleRemovePizza(pizza.id)}>
-                  Remove
-                </button>
+                {pizza.id && (
+                  <>
+                    <button onClick={() => navigate(`/pizza/edit/${pizza.id}`)}>
+                      Edit
+                    </button>
+                    <button onClick={() => handleRemovePizza(pizza.id)}>
+                      Remove
+                    </button>
+                  </>
+                )}
               </li>
             ))}
           </ul>
