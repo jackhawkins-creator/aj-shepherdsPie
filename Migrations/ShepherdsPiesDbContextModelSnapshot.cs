@@ -141,15 +141,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a780de5a-70cb-44e7-88a9-72344923e052",
+                            ConcurrencyStamp = "ec94e046-0291-40a7-ad95-a343a2733017",
                             Email = "admin@shepherdspies.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SHEPHERDSPIES.COM",
                             NormalizedUserName = "ADMIN@SHEPHERDSPIES.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHXie4M0J2yoUDyT4/99YXcg5txSTFIHjhKPbinJZG2wtnch+wub72hn7rvBEeq28Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHM4/chOzmTBL715POFi+iwjCqxyhm107dZjwE+d1NfD5t9oGW08XdJkal8dTMULvQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "35da9aa0-5254-4d64-9117-5381a545feea",
+                            SecurityStamp = "a8188f04-d0bf-4c6a-8911-7fae09850236",
                             TwoFactorEnabled = false,
                             UserName = "admin@shepherdspies.com"
                         },
@@ -157,15 +157,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "user-id-2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "546ef553-cce3-4b81-b21b-8cfeda8db631",
+                            ConcurrencyStamp = "1df08d74-c326-4946-a7d3-e2a0b051222a",
                             Email = "tony@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "TONY@EXAMPLE.COM",
                             NormalizedUserName = "TONY@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKuvRUQzukYvm43cCpWiMnPiVCJ540D985dXd+iPE30BdWyz1uTBKOz5tOgf70hA9w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENbddbRcGHDYX6XZ+42IJLxptwNA3xY1Bp+GeXLF/VQ1x0mg9p08PHCnxvTqjjQjwg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e12969fe-26e9-41b6-a0a4-f81d0ceceb01",
+                            SecurityStamp = "78a94df2-554c-4ac2-baf4-57641efe6404",
                             TwoFactorEnabled = false,
                             UserName = "tony@example.com"
                         },
@@ -173,15 +173,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "user-id-3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "554bb52d-30a9-4073-9327-01f8a8018205",
+                            ConcurrencyStamp = "d4d41c33-376b-42b4-80c1-11529b5b69a4",
                             Email = "lucia@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "LUCIA@EXAMPLE.COM",
                             NormalizedUserName = "LUCIA@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHcF/elwcsK975ShmATB4Rqb1LUVKQBmqQyw0OBbBCWr1Ka02Coo343nfHMiSMzs1Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOGYfUSSmxXlqqEhrI3fUb3Y7wPEoWbj6hJhU+zokEDkAJQn/R5OZnCiMs5M1zxe3g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c4db330e-9c43-48d4-ad16-8412b2e638e3",
+                            SecurityStamp = "3d0e60d5-87e9-48e4-9a46-bbd2df4b9c66",
                             TwoFactorEnabled = false,
                             UserName = "lucia@example.com"
                         },
@@ -189,15 +189,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "user-id-4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2af4b6e1-39c6-4afb-b4f6-d05e6ac0b3df",
+                            ConcurrencyStamp = "3ea843a1-accc-42c8-b3d1-105f3d308f91",
                             Email = "gino@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "GINO@EXAMPLE.COM",
                             NormalizedUserName = "GINO@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF/OWoBuWeLC8BzYIIzrRQsaoVXrzPLxRTGuAk+GpUuQsVNCZFArfqUR5I8NlT4TMw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIMiV42ZHXOwV3v+m2KJfzF97ZfmNLNDebY0ePJk/up8QRpNrX21Qfh0nZuDIe+SQg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "962802ef-64dd-4a95-8fd4-3dd002e2faae",
+                            SecurityStamp = "83003551-5737-4d43-9ecd-9429049bf904",
                             TwoFactorEnabled = false,
                             UserName = "gino@example.com"
                         },
@@ -205,15 +205,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "user-id-5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4450f2bb-3293-4131-b84d-a147f7764a8a",
+                            ConcurrencyStamp = "23bd4083-3b46-4a4d-8829-7beda2f05b16",
                             Email = "sofia@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SOFIA@EXAMPLE.COM",
                             NormalizedUserName = "SOFIA@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBOcH3L1m/GNP/0UqJrjgniUYdJPfDUChWbIDKeWFGpSp4pl92DzLfJIQ+onzul9AQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHhsZuo+0M5jYBA4tiw2BnPWlyYczWCiEQTO6cGOikDbq02TKYr54ynyzKDzKXCOAg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "16eaaea7-8310-461b-a792-c92bfb7f5252",
+                            SecurityStamp = "26bc8f12-5dd7-4ad2-b177-160e7bf03f36",
                             TwoFactorEnabled = false,
                             UserName = "sofia@example.com"
                         });
@@ -350,7 +350,7 @@ namespace ShepherdsPies.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("DelivererId")
+                    b.Property<int?>("DelivererId")
                         .HasColumnType("integer");
 
                     b.Property<bool>("IsDelivered")
@@ -359,7 +359,7 @@ namespace ShepherdsPies.Migrations
                     b.Property<int>("OrderTakerId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TableNum")
+                    b.Property<int?>("TableNum")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Tip")
@@ -377,7 +377,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 4, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3814),
+                            CreatedAt = new DateTime(2025, 6, 4, 19, 43, 2, 957, DateTimeKind.Utc).AddTicks(1321),
                             DelivererId = 1,
                             IsDelivered = false,
                             OrderTakerId = 1,
@@ -387,7 +387,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 3, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3825),
+                            CreatedAt = new DateTime(2025, 6, 3, 19, 43, 2, 957, DateTimeKind.Utc).AddTicks(1331),
                             DelivererId = 3,
                             IsDelivered = true,
                             OrderTakerId = 2,
@@ -397,7 +397,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 1, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3831),
+                            CreatedAt = new DateTime(2025, 6, 1, 19, 43, 2, 957, DateTimeKind.Utc).AddTicks(1339),
                             DelivererId = 4,
                             IsDelivered = true,
                             OrderTakerId = 1,
@@ -407,7 +407,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 5, 25, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3832),
+                            CreatedAt = new DateTime(2025, 5, 25, 19, 43, 2, 957, DateTimeKind.Utc).AddTicks(1341),
                             DelivererId = 2,
                             IsDelivered = false,
                             OrderTakerId = 3,
@@ -417,7 +417,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 5, 5, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3833),
+                            CreatedAt = new DateTime(2025, 5, 5, 19, 43, 2, 957, DateTimeKind.Utc).AddTicks(1342),
                             DelivererId = 1,
                             IsDelivered = true,
                             OrderTakerId = 4,
@@ -837,9 +837,7 @@ namespace ShepherdsPies.Migrations
                 {
                     b.HasOne("ShepherdsPies.Models.UserProfile", "Deliverer")
                         .WithMany()
-                        .HasForeignKey("DelivererId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DelivererId");
 
                     b.HasOne("ShepherdsPies.Models.UserProfile", "OrderTaker")
                         .WithMany()

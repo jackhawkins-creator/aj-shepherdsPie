@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getAllUserProfiles } from "../managers/userProfileManager";
 import { updateOrder, createOrder } from "../managers/orderManager";
-import { getPizzasByOrderId } from "../managers/pizzaManager";
 
 export default function CreateOrder({ loggedInUser }) {
   const [isDelivery, setIsDelivery] = useState(false);
@@ -35,25 +34,22 @@ export default function CreateOrder({ loggedInUser }) {
     setPizzas((prev) => prev.filter((p) => p.id !== pizzaId));
   };
 
-  const handleSubmit = () => {
-    const orderDetails = {
-      orderTakerId: loggedInUser.id,
-      tip: parseFloat(tip),
-      tableNum: isDelivery ? null : parseInt(tableNumber),
-      delivererId: isDelivery ? parseInt(selectedDelivererId) : null,
-      isDelivered: false,
-      pizzas: pizzas,
-    };
-
-    if (orderId) {
-      updateOrder({ id: orderId, ...orderDetails }).then(() => navigate("/"));
-    } else {
-      createOrder(orderDetails).then((createdOrder) => {
-        setOrderId(createdOrder.id);
-        navigate("/", { state: { orderId: createdOrder.id } });
-      });
-    }
+const handleSubmit = () => {
+  const orderDetails = {
+    orderTakerId: loggedInUser.id,
+    tip: parseFloat(tip),
+    tableNum: isDelivery ? null : parseInt(tableNumber),
+    delivererId: isDelivery ? parseInt(selectedDelivererId) : null,
+    isDelivered: false,
+    pizzas: [] // Start with no pizzas
   };
+
+  createOrder(orderDetails).then((createdOrder) => {
+    setOrderId(createdOrder.id);
+    navigate("/"); // Redirect home
+  });
+};
+
 
   return (
     <div>
@@ -148,14 +144,6 @@ export default function CreateOrder({ loggedInUser }) {
           <p>No pizzas in order</p>
         )}
       </div>
-
-      <button
-        onClick={() =>
-          navigate("/pizza/create", { state: { orderId, pizzas } })
-        }
-      >
-        Add Pizza
-      </button>
 
       <button className="btn btn-primary" onClick={handleSubmit}>
         Submit Order

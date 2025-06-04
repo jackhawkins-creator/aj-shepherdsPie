@@ -243,8 +243,8 @@ namespace ShepherdsPies.Migrations
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Tip = table.Column<decimal>(type: "numeric", nullable: false),
                     OrderTakerId = table.Column<int>(type: "integer", nullable: false),
-                    DelivererId = table.Column<int>(type: "integer", nullable: false),
-                    TableNum = table.Column<int>(type: "integer", nullable: false),
+                    DelivererId = table.Column<int>(type: "integer", nullable: true),
+                    TableNum = table.Column<int>(type: "integer", nullable: true),
                     IsDelivered = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -254,8 +254,7 @@ namespace ShepherdsPies.Migrations
                         name: "FK_Orders_UserProfiles_DelivererId",
                         column: x => x.DelivererId,
                         principalTable: "UserProfiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_UserProfiles_OrderTakerId",
                         column: x => x.OrderTakerId,
@@ -335,11 +334,11 @@ namespace ShepherdsPies.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "a780de5a-70cb-44e7-88a9-72344923e052", "admin@shepherdspies.com", true, false, null, "ADMIN@SHEPHERDSPIES.COM", "ADMIN@SHEPHERDSPIES.COM", "AQAAAAIAAYagAAAAEHXie4M0J2yoUDyT4/99YXcg5txSTFIHjhKPbinJZG2wtnch+wub72hn7rvBEeq28Q==", null, false, "35da9aa0-5254-4d64-9117-5381a545feea", false, "admin@shepherdspies.com" },
-                    { "user-id-2", 0, "546ef553-cce3-4b81-b21b-8cfeda8db631", "tony@example.com", true, false, null, "TONY@EXAMPLE.COM", "TONY@EXAMPLE.COM", "AQAAAAIAAYagAAAAEKuvRUQzukYvm43cCpWiMnPiVCJ540D985dXd+iPE30BdWyz1uTBKOz5tOgf70hA9w==", null, false, "e12969fe-26e9-41b6-a0a4-f81d0ceceb01", false, "tony@example.com" },
-                    { "user-id-3", 0, "554bb52d-30a9-4073-9327-01f8a8018205", "lucia@example.com", true, false, null, "LUCIA@EXAMPLE.COM", "LUCIA@EXAMPLE.COM", "AQAAAAIAAYagAAAAEHcF/elwcsK975ShmATB4Rqb1LUVKQBmqQyw0OBbBCWr1Ka02Coo343nfHMiSMzs1Q==", null, false, "c4db330e-9c43-48d4-ad16-8412b2e638e3", false, "lucia@example.com" },
-                    { "user-id-4", 0, "2af4b6e1-39c6-4afb-b4f6-d05e6ac0b3df", "gino@example.com", true, false, null, "GINO@EXAMPLE.COM", "GINO@EXAMPLE.COM", "AQAAAAIAAYagAAAAEF/OWoBuWeLC8BzYIIzrRQsaoVXrzPLxRTGuAk+GpUuQsVNCZFArfqUR5I8NlT4TMw==", null, false, "962802ef-64dd-4a95-8fd4-3dd002e2faae", false, "gino@example.com" },
-                    { "user-id-5", 0, "4450f2bb-3293-4131-b84d-a147f7764a8a", "sofia@example.com", true, false, null, "SOFIA@EXAMPLE.COM", "SOFIA@EXAMPLE.COM", "AQAAAAIAAYagAAAAEBOcH3L1m/GNP/0UqJrjgniUYdJPfDUChWbIDKeWFGpSp4pl92DzLfJIQ+onzul9AQ==", null, false, "16eaaea7-8310-461b-a792-c92bfb7f5252", false, "sofia@example.com" }
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "ec94e046-0291-40a7-ad95-a343a2733017", "admin@shepherdspies.com", true, false, null, "ADMIN@SHEPHERDSPIES.COM", "ADMIN@SHEPHERDSPIES.COM", "AQAAAAIAAYagAAAAEHM4/chOzmTBL715POFi+iwjCqxyhm107dZjwE+d1NfD5t9oGW08XdJkal8dTMULvQ==", null, false, "a8188f04-d0bf-4c6a-8911-7fae09850236", false, "admin@shepherdspies.com" },
+                    { "user-id-2", 0, "1df08d74-c326-4946-a7d3-e2a0b051222a", "tony@example.com", true, false, null, "TONY@EXAMPLE.COM", "TONY@EXAMPLE.COM", "AQAAAAIAAYagAAAAENbddbRcGHDYX6XZ+42IJLxptwNA3xY1Bp+GeXLF/VQ1x0mg9p08PHCnxvTqjjQjwg==", null, false, "78a94df2-554c-4ac2-baf4-57641efe6404", false, "tony@example.com" },
+                    { "user-id-3", 0, "d4d41c33-376b-42b4-80c1-11529b5b69a4", "lucia@example.com", true, false, null, "LUCIA@EXAMPLE.COM", "LUCIA@EXAMPLE.COM", "AQAAAAIAAYagAAAAEOGYfUSSmxXlqqEhrI3fUb3Y7wPEoWbj6hJhU+zokEDkAJQn/R5OZnCiMs5M1zxe3g==", null, false, "3d0e60d5-87e9-48e4-9a46-bbd2df4b9c66", false, "lucia@example.com" },
+                    { "user-id-4", 0, "3ea843a1-accc-42c8-b3d1-105f3d308f91", "gino@example.com", true, false, null, "GINO@EXAMPLE.COM", "GINO@EXAMPLE.COM", "AQAAAAIAAYagAAAAEIMiV42ZHXOwV3v+m2KJfzF97ZfmNLNDebY0ePJk/up8QRpNrX21Qfh0nZuDIe+SQg==", null, false, "83003551-5737-4d43-9ecd-9429049bf904", false, "gino@example.com" },
+                    { "user-id-5", 0, "23bd4083-3b46-4a4d-8829-7beda2f05b16", "sofia@example.com", true, false, null, "SOFIA@EXAMPLE.COM", "SOFIA@EXAMPLE.COM", "AQAAAAIAAYagAAAAEHhsZuo+0M5jYBA4tiw2BnPWlyYczWCiEQTO6cGOikDbq02TKYr54ynyzKDzKXCOAg==", null, false, "26bc8f12-5dd7-4ad2-b177-160e7bf03f36", false, "sofia@example.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -406,11 +405,11 @@ namespace ShepherdsPies.Migrations
                 columns: new[] { "Id", "CreatedAt", "DelivererId", "IsDelivered", "OrderTakerId", "TableNum", "Tip" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 6, 4, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3814), 1, false, 1, 3, 5.00m },
-                    { 2, new DateTime(2025, 6, 3, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3825), 3, true, 2, 5, 3.00m },
-                    { 3, new DateTime(2025, 6, 1, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3831), 4, true, 1, 7, 7.50m },
-                    { 4, new DateTime(2025, 5, 25, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3832), 2, false, 3, 2, 4.25m },
-                    { 5, new DateTime(2025, 5, 5, 16, 21, 53, 371, DateTimeKind.Utc).AddTicks(3833), 1, true, 4, 1, 6.00m }
+                    { 1, new DateTime(2025, 6, 4, 19, 43, 2, 957, DateTimeKind.Utc).AddTicks(1321), 1, false, 1, 3, 5.00m },
+                    { 2, new DateTime(2025, 6, 3, 19, 43, 2, 957, DateTimeKind.Utc).AddTicks(1331), 3, true, 2, 5, 3.00m },
+                    { 3, new DateTime(2025, 6, 1, 19, 43, 2, 957, DateTimeKind.Utc).AddTicks(1339), 4, true, 1, 7, 7.50m },
+                    { 4, new DateTime(2025, 5, 25, 19, 43, 2, 957, DateTimeKind.Utc).AddTicks(1341), 2, false, 3, 2, 4.25m },
+                    { 5, new DateTime(2025, 5, 5, 19, 43, 2, 957, DateTimeKind.Utc).AddTicks(1342), 1, true, 4, 1, 6.00m }
                 });
 
             migrationBuilder.InsertData(
