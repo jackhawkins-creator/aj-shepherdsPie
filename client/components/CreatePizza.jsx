@@ -1,21 +1,25 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
-  getAllSizes,
+  createPizza,
   getAllCheeses,
   getAllSauces,
+  getAllSizes,
   getAllToppings,
-  createPizza,
 } from "../managers/pizzaManager";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function CreatePizza() {
   const navigate = useNavigate();
   const location = useLocation();
-  const previousPizzas = location.state?.pizzas || [];
+
   const [sizes, setSizes] = useState([]);
   const [cheeses, setCheeses] = useState([]);
   const [sauces, setSauces] = useState([]);
   const [toppings, setToppings] = useState([]);
+
+  const orderId = location.state?.orderId;
+  const previousPizzas = location.state?.pizzas || [];
+
   const [selectedPizza, setSelectedPizza] = useState({
     sizeId: null,
     cheeseId: null,
@@ -33,19 +37,35 @@ export default function CreatePizza() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const pizzaToSubmit = {
-      ...selectedPizza,
-      pizzaToppings: selectedPizza.pizzaToppings.map((tid) => ({
-        toppingId: tid,
+    if (!selectedPizza.sizeId || !selectedPizza.cheeseId || !selectedPizza.sauceId) {
+      alert("Please select a size, cheese, and sauce.");
+      return;
+    }
+
+    const newPizza = {
+      orderId: orderId,
+      sizeId: selectedPizza.sizeId,
+      cheeseId: selectedPizza.cheeseId,
+      sauceId: selectedPizza.sauceId,
+      pizzaToppings: selectedPizza.pizzaToppings.map((id) => ({
+        toppingId: id,
       })),
     };
 
-    navigate("/order/create", {
-      state: {
-        newPizza: pizzaToSubmit,
-        pizzas: [...previousPizzas, pizzaToSubmit],
-      },
-    });
+    console.log("Pizza to send:", newPizza);
+
+    if (orderId) {
+      // Submit to database if order already exists
+      createPizza(newPizza).then(() => navigate("/order/create"));
+    } else {
+      // Just navigate back with new pizza in memory
+      navigate("/order/create", {
+        state: {
+          newPizza,
+          pizzas: [...previousPizzas, newPizza],
+        },
+      });
+    }
   };
 
   const toggleTopping = (id) => {
@@ -61,65 +81,76 @@ export default function CreatePizza() {
     <form onSubmit={handleSubmit}>
       <h2>Create a Pizza</h2>
 
-      <h4>Size</h4>
-      {sizes.map((s) => (
-        <label key={s.id}>
-          <input
-            type="radio"
-            name="size"
-            value={s.id}
-            onChange={() =>
-              setSelectedPizza({ ...selectedPizza, sizeId: s.id })
-            }
-          />
-          {s.name}
-        </label>
-      ))}
+      <fieldset>
+        <legend>Size</legend>
+        {sizes.map((size) => (
+          <label key={size.id}>
+            <input
+              type="radio"
+              name="size"
+              value={size.id}
+              checked={selectedPizza.sizeId === size.id}
+              onChange={() =>
+                setSelectedPizza({ ...selectedPizza, sizeId: size.id })
+              }
+            />
+            {size.name}
+          </label>
+        ))}
+      </fieldset>
 
-      <h4>Cheese</h4>
-      {cheeses.map((c) => (
-        <label key={c.id}>
-          <input
-            type="radio"
-            name="cheese"
-            value={c.id}
-            onChange={() =>
-              setSelectedPizza({ ...selectedPizza, cheeseId: c.id })
-            }
-          />
-          {c.name}
-        </label>
-      ))}
+      <fieldset>
+        <legend>Sauce</legend>
+        {sauces.map((sauce) => (
+          <label key={sauce.id}>
+            <input
+              type="radio"
+              name="sauce"
+              value={sauce.id}
+              checked={selectedPizza.sauceId === sauce.id}
+              onChange={() =>
+                setSelectedPizza({ ...selectedPizza, sauceId: sauce.id })
+              }
+            />
+            {sauce.name}
+          </label>
+        ))}
+      </fieldset>
 
-      <h4>Sauce</h4>
-      {sauces.map((s) => (
-        <label key={s.id}>
-          <input
-            type="radio"
-            name="sauce"
-            value={s.id}
-            onChange={() =>
-              setSelectedPizza({ ...selectedPizza, sauceId: s.id })
-            }
-          />
-          {s.name}
-        </label>
-      ))}
+      <fieldset>
+        <legend>Cheese</legend>
+        {cheeses.map((cheese) => (
+          <label key={cheese.id}>
+            <input
+              type="radio"
+              name="cheese"
+              value={cheese.id}
+              checked={selectedPizza.cheeseId === cheese.id}
+              onChange={() =>
+                setSelectedPizza({ ...selectedPizza, cheeseId: cheese.id })
+              }
+            />
+            {cheese.name}
+          </label>
+        ))}
+      </fieldset>
 
-      <h4>Toppings</h4>
-      {toppings.map((t) => (
-        <label key={t.id}>
-          <input
-            type="checkbox"
-            value={t.id}
-            checked={selectedPizza.pizzaToppings.includes(t.id)}
-            onChange={() => toggleTopping(t.id)}
-          />
-          {t.name}
-        </label>
-      ))}
+      <fieldset>
+        <legend>Toppings</legend>
+        {toppings.map((topping) => (
+          <label key={topping.id}>
+            <input
+              type="checkbox"
+              value={topping.id}
+              checked={selectedPizza.pizzaToppings.includes(topping.id)}
+              onChange={() => toggleTopping(topping.id)}
+            />
+            {topping.name} {topping.price && `($${topping.price.toFixed(2)})`}
+          </label>
+        ))}
+      </fieldset>
 
-      <button type="submit">Submit Pizza</button>
+      <button type="submit">Confirm Pizza</button>
     </form>
   );
 }

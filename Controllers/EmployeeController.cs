@@ -24,11 +24,6 @@ public class EmployeeController : ControllerBase
     {
         return Ok(_dbContext.Employees.ToList());
     }
-
-
-
-
-
 }
 
 
