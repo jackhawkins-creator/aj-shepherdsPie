@@ -29,7 +29,7 @@ public class PizzaController : ControllerBase
 
     //GET single pizza by id expand with topping
     [HttpGet("{id}")]
-    //[Authorize]
+    [Authorize]
     public IActionResult GetPizzaById(int id)
     {
         return Ok(_dbContext.Pizzas.Include(p => p.Size)
@@ -41,7 +41,7 @@ public class PizzaController : ControllerBase
     }
     // POST add pizza to order
     [HttpPost]
-    //[Authorize]
+    [Authorize]
     public IActionResult CreatePizza(Pizza pizza)
     {
         // Validate foreign key references
@@ -93,7 +93,7 @@ public class PizzaController : ControllerBase
     }
     // PUT update pizza 
     [HttpPut("{id}")]
-    //[Authorize]
+    [Authorize]
     public IActionResult UpdatePizza(int id, Pizza pizza)
     {
         Pizza existingPizza = _dbContext.Pizzas
@@ -119,7 +119,7 @@ public class PizzaController : ControllerBase
 
     //GET All Sauces
     [HttpGet("sauces")]
-    //[Authorize]
+    [Authorize]
     public IActionResult GetAllSauces()
     {
         return Ok(_dbContext.Sauces.ToList());
@@ -128,7 +128,7 @@ public class PizzaController : ControllerBase
 
     //GET All Sizes
     [HttpGet("sizes")]
-    //[Authorize]
+    [Authorize]
     public IActionResult GetAllSizes()
     {
         return Ok(_dbContext.Sizes.ToList());

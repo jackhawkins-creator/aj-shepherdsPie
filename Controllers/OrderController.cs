@@ -26,6 +26,12 @@ public class OrderController : ControllerBase
         return Ok(_dbContext.Orders.Include(o => o.OrderTaker)
         .Include(o => o.Deliverer)
         .Include(o => o.Pizzas)
+            .ThenInclude(p => p.Cheese)
+        .Include(o => o.Pizzas)
+            .ThenInclude(p => p.Sauce)
+        .Include(o => o.Pizzas)
+            .ThenInclude(p => p.Size)
+        .Include(o => o.Pizzas)
             .ThenInclude(p => p.PizzaToppings)
             .ThenInclude(tp => tp.Topping)
         .OrderByDescending(o => o.CreatedAt).ToList());
