@@ -56,7 +56,7 @@ export default function HomePage({loggedInUser}) {
       {order.tableNum !== null ? (
         <div>Table #: {order.tableNum}</div>
       ) : (
-        <div>Delivery Driver: {loggedInUser.firstName} {loggedInUser.lastName}</div>
+        <div>Delivery Driver: {order.deliverer?.firstName} {order.deliverer?.lastName}</div>
       )}
 
       <div>
