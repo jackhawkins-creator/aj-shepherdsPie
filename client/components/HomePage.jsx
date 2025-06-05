@@ -30,31 +30,40 @@ export default function HomePage({ loggedInUser }) {
     return orderDate === filterDate;
   });
 
-  return (
-    <div>
-      <label>Filter By Day</label>
-      <input
-        type="date"
-        id="filterDate"
-        className="form-control"
-        value={filterDate}
-        onChange={(event) => setFilterDate(event.target.value)}
-      />
-      <h6>Orders</h6>
-       <ul>
-  {filteredOrders.map((order) => (
-    <li key={order.id} style={{ marginBottom: "1rem" }}>
-      <strong>Order #{order.id}</strong>
-      <button onClick={() => navigate("/pizza/create", { state: { orderId: order.id } })}>
-      Add Pizza
-    </button>
-      <div>Order Taker: {loggedInUser.firstName} {loggedInUser.lastName}</div>
-      
-      {order.tableNum !== null ? (
-        <div>Table #: {order.tableNum}</div>
-      ) : (
-        <div>Delivery Driver: {order.deliverer?.firstName} {order.deliverer?.lastName}</div>
-      )}
+    return (
+  <div>
+    <label>Filter By Day</label>
+    <input
+      type="date"
+      id="filterDate"
+      className="form-control"
+      value={filterDate}
+      onChange={(event) => setFilterDate(event.target.value)}
+    />
+    <h6>Orders</h6>
+    <ul>
+      {filteredOrders.map((order) => (
+          <li key={order.id}>
+            <strong>Order #{order.id}</strong>
+            <button
+              onClick={() =>
+                navigate("/pizza/create", { state: { orderId: order.id } })
+              }
+            >
+              Add Pizza
+            </button>
+            <div>
+              Order Taker: {loggedInUser.firstName} {loggedInUser.lastName}
+            </div>
+
+            {order.tableNum !== null ? (
+              <div>Table #: {order.tableNum}</div>
+            ) : (
+              <div>
+                Delivery Driver:{" "}
+                {order.deliverer?.firstName} {order.deliverer?.lastName}
+              </div>
+            )}
 
             <div>
               <strong>Pizzas:</strong>
@@ -62,19 +71,34 @@ export default function HomePage({ loggedInUser }) {
                 {order.pizzas.map((pizza, index) => (
                   <li key={pizza.id}>
                     <div>
-                      <strong>Pizza #{index + 1}:</strong> Size - {pizza.size?.name},
-                      Cheese - {pizza.cheese?.name},
-                      Sauce - {pizza.sauce?.name}
+                      <strong>Pizza #{index + 1}:</strong> Size -{" "}
+                      {pizza.size?.name}, Cheese - {pizza.cheese?.name}, Sauce -{" "}
+                      {pizza.sauce?.name}
                       <br />
                       Toppings:{" "}
                       {pizza.pizzaToppings.length > 0
-                        ? pizza.pizzaToppings.map((pt) => pt.topping?.name).join(", ")
+                        ? pizza.pizzaToppings
+                            .map((pt) => pt.topping?.name)
+                            .join(", ")
                         : "None"}
                     </div>
-                    <button onClick={() => navigate(`/pizza/edit/${pizza.id}`)}>Edit Pizza</button>
+                    <button
+                      onClick={() => navigate(`/pizza/edit/${pizza.id}`)}
+                    >
+                      Edit Pizza
+                    </button>
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <div>
+              <strong>Grand Total: ${order.totalOrderCost}</strong>
+            </div>
+
+            {/* ✅ Order Date/Time */}
+            <div>
+              Ordered at: {new Date(order.createdAt).toLocaleString()}
             </div>
 
             <button onClick={() => navigate(`/order/edit/${order.id}`)}>
@@ -85,11 +109,15 @@ export default function HomePage({ loggedInUser }) {
             </button>
           </li>
         ))}
-      </ul>
+    </ul>
 
-      <button className="btn btn-primary" onClick={() => navigate(`/order/create`)}>
-        Create Order
-      </button>
-    </div>
-  );
+    <button
+      className="btn btn-primary"
+      onClick={() => navigate(`/order/create`)}
+    >
+      Create Order
+    </button>
+  </div>
+);
+
 }

@@ -39,7 +39,7 @@ public class OrderController : ControllerBase
 
     //GET single Order
     [HttpGet("{id}")]
-    [Authorize]
+    // [Authorize]
     public IActionResult GetOrderById(int id)
     {
         return Ok(_dbContext.Orders.Include(o => o.OrderTaker)

@@ -12,4 +12,12 @@ public class Pizza
     public Sauce? Sauce { get; set; }
     public Cheese? Cheese { get; set; }
     public Size? Size { get; set; }
+    private static readonly decimal ToppingCost = .5M;
+    public decimal TotalPizzaCost
+    {
+        get
+        {
+            return Size.Price + (PizzaToppings.Count * ToppingCost);
+        }
+    }
 }
