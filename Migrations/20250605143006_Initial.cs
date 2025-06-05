@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ShepherdsPies.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -85,7 +85,8 @@ namespace ShepherdsPies.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -334,11 +335,11 @@ namespace ShepherdsPies.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "70978343-8856-4632-b37b-b540eb161fdf", "admin@shepherdspies.com", true, false, null, "ADMIN@SHEPHERDSPIES.COM", "ADMIN@SHEPHERDSPIES.COM", "AQAAAAIAAYagAAAAEP5gSljpWHTPhA9IsmtI0z7D87Di8NSBlPn31r2W51gV59/FQIk5+FhWfZ91gRxTRw==", null, false, "fc5d2ac4-4399-42e9-849c-f2563e1114a5", false, "admin@shepherdspies.com" },
-                    { "user-id-2", 0, "22bd42b1-36d4-48b7-83ca-10df7568532e", "tony@example.com", true, false, null, "TONY@EXAMPLE.COM", "TONY@EXAMPLE.COM", "AQAAAAIAAYagAAAAEIYKEdN8v/0xny04ewyPVG2VEh13xPsVo+rRKMRcwlrwct2VnaX+du6qg/NmH0kIoQ==", null, false, "d5da0271-a454-4f8d-a792-97d9d1638502", false, "tony@example.com" },
-                    { "user-id-3", 0, "0c526025-8a11-42a1-aa4c-a11ef5db4566", "lucia@example.com", true, false, null, "LUCIA@EXAMPLE.COM", "LUCIA@EXAMPLE.COM", "AQAAAAIAAYagAAAAECSV2+BfQRCpRjf8MOPbv91NOeIBHIEcDsj0SkyvLuF/jXHWUz5nTi1gK6Edkd2jvQ==", null, false, "0b64d4bc-08d4-4013-8c40-4db29e6b42bb", false, "lucia@example.com" },
-                    { "user-id-4", 0, "f9bc3924-45b4-45bc-96bc-e891459dfba7", "gino@example.com", true, false, null, "GINO@EXAMPLE.COM", "GINO@EXAMPLE.COM", "AQAAAAIAAYagAAAAEGjNEkK4t2kHG8G4iy6/ggj89D/12QAg43+zUpkKNxAPRTY8GcqJHMlbxiVvFXJxGA==", null, false, "9652174f-6033-4213-ae69-680aa5e6292e", false, "gino@example.com" },
-                    { "user-id-5", 0, "9268084d-4bad-4d37-900f-345c29d8734a", "sofia@example.com", true, false, null, "SOFIA@EXAMPLE.COM", "SOFIA@EXAMPLE.COM", "AQAAAAIAAYagAAAAEBOtFsIUekY1QVz3QZKzKEcb7LrrI6Hk6oYEqXIAHAUMq4RJ0jgj21YK0atXYYqM8g==", null, false, "4a2045f7-2e0e-4a1b-ae5e-1551843f86f7", false, "sofia@example.com" }
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "78b02a54-bd7a-4a05-ae46-4d10209e4807", "admin@shepherdspies.com", true, false, null, "ADMIN@SHEPHERDSPIES.COM", "ADMIN@SHEPHERDSPIES.COM", "AQAAAAIAAYagAAAAEL/YPygeJhs/EKpXFz/m5ZKdjiLRRLNy5X8aXXnxScIuzkdukPzMoZq6YZgQGLJliw==", null, false, "6a8fb6d7-3921-4e93-acc2-2e84a0a150ec", false, "admin@shepherdspies.com" },
+                    { "user-id-2", 0, "a9831e7f-52cd-41b1-8c41-79f3311af08b", "tony@example.com", true, false, null, "TONY@EXAMPLE.COM", "TONY@EXAMPLE.COM", "AQAAAAIAAYagAAAAEDFFSoSNkyb3o2aa+E/aRJx/YTMEyTXHGXr/vhiTBtub8O3jYPyhtmRJ5+XtOvjpyw==", null, false, "3968db27-8606-45d8-8788-60e42c2eb6b3", false, "tony@example.com" },
+                    { "user-id-3", 0, "c15cee56-b72b-4605-b6bc-881e1b44e191", "lucia@example.com", true, false, null, "LUCIA@EXAMPLE.COM", "LUCIA@EXAMPLE.COM", "AQAAAAIAAYagAAAAEHePfV7QGpcVbYbdydsTDquy/SmYV/j7nQKk2q+zXYloPL019f7ZKIe+zmiFRmZWUQ==", null, false, "5c8d02ed-8c8d-4e2c-a5b2-f6adea6955a7", false, "lucia@example.com" },
+                    { "user-id-4", 0, "6a33dfeb-5dfc-42e5-bdf9-d7e9d5ba0652", "gino@example.com", true, false, null, "GINO@EXAMPLE.COM", "GINO@EXAMPLE.COM", "AQAAAAIAAYagAAAAELdzxOmAuC8JzSmJCYfvq0mAF+DCBo8+mZrpqHHgIo5UoCqd9AFRdDwo2GBtzZHwBQ==", null, false, "d55c38de-32e1-4a0c-be96-a433a652c635", false, "gino@example.com" },
+                    { "user-id-5", 0, "e50b5842-2091-4e7b-91b3-5fe664d419f0", "sofia@example.com", true, false, null, "SOFIA@EXAMPLE.COM", "SOFIA@EXAMPLE.COM", "AQAAAAIAAYagAAAAEAXsflioRdqS8BtvicnXx5hWMTeOEurrl4or108Cd8kZgZgjK3HqGS1QXMawFG8U5A==", null, false, "4d6e052f-ba26-4bbd-bf80-235b09d3a342", false, "sofia@example.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -365,12 +366,12 @@ namespace ShepherdsPies.Migrations
 
             migrationBuilder.InsertData(
                 table: "Sizes",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, "Small" },
-                    { 2, "Medium" },
-                    { 3, "Large" }
+                    { 1, "Small", 10.00m },
+                    { 2, "Medium", 12.00m },
+                    { 3, "Large", 15.00m }
                 });
 
             migrationBuilder.InsertData(
@@ -405,11 +406,11 @@ namespace ShepherdsPies.Migrations
                 columns: new[] { "Id", "CreatedAt", "DelivererId", "IsDelivered", "OrderTakerId", "TableNum", "Tip" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 6, 4, 19, 56, 9, 645, DateTimeKind.Utc).AddTicks(7978), 1, false, 1, 3, 5.00m },
-                    { 2, new DateTime(2025, 6, 3, 19, 56, 9, 645, DateTimeKind.Utc).AddTicks(7986), 3, true, 2, 5, 3.00m },
-                    { 3, new DateTime(2025, 6, 1, 19, 56, 9, 645, DateTimeKind.Utc).AddTicks(7996), 4, true, 1, 7, 7.50m },
-                    { 4, new DateTime(2025, 5, 25, 19, 56, 9, 645, DateTimeKind.Utc).AddTicks(8054), 2, false, 3, 2, 4.25m },
-                    { 5, new DateTime(2025, 5, 5, 19, 56, 9, 645, DateTimeKind.Utc).AddTicks(8056), 1, true, 4, 1, 6.00m }
+                    { 1, new DateTime(2025, 6, 5, 14, 30, 5, 520, DateTimeKind.Utc).AddTicks(5162), 1, false, 1, 3, 5.00m },
+                    { 2, new DateTime(2025, 6, 4, 14, 30, 5, 520, DateTimeKind.Utc).AddTicks(5178), 3, true, 2, 5, 3.00m },
+                    { 3, new DateTime(2025, 6, 2, 14, 30, 5, 520, DateTimeKind.Utc).AddTicks(5187), 4, true, 1, 7, 7.50m },
+                    { 4, new DateTime(2025, 5, 26, 14, 30, 5, 520, DateTimeKind.Utc).AddTicks(5189), 2, false, 3, 2, 4.25m },
+                    { 5, new DateTime(2025, 5, 6, 14, 30, 5, 520, DateTimeKind.Utc).AddTicks(5191), 1, true, 4, 1, 6.00m }
                 });
 
             migrationBuilder.InsertData(

@@ -180,9 +180,9 @@ public class ShepherdsPiesDbContext : IdentityDbContext<IdentityUser>
 
 
         modelBuilder.Entity<Size>().HasData(
-            new Size { Id = 1, Name = "Small" },
-            new Size { Id = 2, Name = "Medium" },
-            new Size { Id = 3, Name = "Large" }
+            new Size { Id = 1, Name = "Small", Price = 10.00M },
+            new Size { Id = 2, Name = "Medium", Price = 12.00M },
+            new Size { Id = 3, Name = "Large", Price = 15.00M }
         );
 
         modelBuilder.Entity<Cheese>().HasData(

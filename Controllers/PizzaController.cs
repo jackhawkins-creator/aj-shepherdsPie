@@ -29,7 +29,7 @@ public class PizzaController : ControllerBase
 
     //GET single pizza by id expand with topping
     [HttpGet("{id}")]
-    [Authorize]
+    // [Authorize]
     public IActionResult GetPizzaById(int id)
     {
         return Ok(_dbContext.Pizzas.Include(p => p.Size)

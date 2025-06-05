@@ -12,8 +12,8 @@ using ShepherdsPies.Data;
 namespace ShepherdsPies.Migrations
 {
     [DbContext(typeof(ShepherdsPiesDbContext))]
-    [Migration("20250604195610_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250605143006_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -144,15 +144,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "70978343-8856-4632-b37b-b540eb161fdf",
+                            ConcurrencyStamp = "78b02a54-bd7a-4a05-ae46-4d10209e4807",
                             Email = "admin@shepherdspies.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SHEPHERDSPIES.COM",
                             NormalizedUserName = "ADMIN@SHEPHERDSPIES.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEP5gSljpWHTPhA9IsmtI0z7D87Di8NSBlPn31r2W51gV59/FQIk5+FhWfZ91gRxTRw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL/YPygeJhs/EKpXFz/m5ZKdjiLRRLNy5X8aXXnxScIuzkdukPzMoZq6YZgQGLJliw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fc5d2ac4-4399-42e9-849c-f2563e1114a5",
+                            SecurityStamp = "6a8fb6d7-3921-4e93-acc2-2e84a0a150ec",
                             TwoFactorEnabled = false,
                             UserName = "admin@shepherdspies.com"
                         },
@@ -160,15 +160,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "user-id-2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "22bd42b1-36d4-48b7-83ca-10df7568532e",
+                            ConcurrencyStamp = "a9831e7f-52cd-41b1-8c41-79f3311af08b",
                             Email = "tony@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "TONY@EXAMPLE.COM",
                             NormalizedUserName = "TONY@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIYKEdN8v/0xny04ewyPVG2VEh13xPsVo+rRKMRcwlrwct2VnaX+du6qg/NmH0kIoQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDFFSoSNkyb3o2aa+E/aRJx/YTMEyTXHGXr/vhiTBtub8O3jYPyhtmRJ5+XtOvjpyw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d5da0271-a454-4f8d-a792-97d9d1638502",
+                            SecurityStamp = "3968db27-8606-45d8-8788-60e42c2eb6b3",
                             TwoFactorEnabled = false,
                             UserName = "tony@example.com"
                         },
@@ -176,15 +176,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "user-id-3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0c526025-8a11-42a1-aa4c-a11ef5db4566",
+                            ConcurrencyStamp = "c15cee56-b72b-4605-b6bc-881e1b44e191",
                             Email = "lucia@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "LUCIA@EXAMPLE.COM",
                             NormalizedUserName = "LUCIA@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECSV2+BfQRCpRjf8MOPbv91NOeIBHIEcDsj0SkyvLuF/jXHWUz5nTi1gK6Edkd2jvQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHePfV7QGpcVbYbdydsTDquy/SmYV/j7nQKk2q+zXYloPL019f7ZKIe+zmiFRmZWUQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0b64d4bc-08d4-4013-8c40-4db29e6b42bb",
+                            SecurityStamp = "5c8d02ed-8c8d-4e2c-a5b2-f6adea6955a7",
                             TwoFactorEnabled = false,
                             UserName = "lucia@example.com"
                         },
@@ -192,15 +192,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "user-id-4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f9bc3924-45b4-45bc-96bc-e891459dfba7",
+                            ConcurrencyStamp = "6a33dfeb-5dfc-42e5-bdf9-d7e9d5ba0652",
                             Email = "gino@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "GINO@EXAMPLE.COM",
                             NormalizedUserName = "GINO@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGjNEkK4t2kHG8G4iy6/ggj89D/12QAg43+zUpkKNxAPRTY8GcqJHMlbxiVvFXJxGA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELdzxOmAuC8JzSmJCYfvq0mAF+DCBo8+mZrpqHHgIo5UoCqd9AFRdDwo2GBtzZHwBQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9652174f-6033-4213-ae69-680aa5e6292e",
+                            SecurityStamp = "d55c38de-32e1-4a0c-be96-a433a652c635",
                             TwoFactorEnabled = false,
                             UserName = "gino@example.com"
                         },
@@ -208,15 +208,15 @@ namespace ShepherdsPies.Migrations
                         {
                             Id = "user-id-5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9268084d-4bad-4d37-900f-345c29d8734a",
+                            ConcurrencyStamp = "e50b5842-2091-4e7b-91b3-5fe664d419f0",
                             Email = "sofia@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SOFIA@EXAMPLE.COM",
                             NormalizedUserName = "SOFIA@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBOtFsIUekY1QVz3QZKzKEcb7LrrI6Hk6oYEqXIAHAUMq4RJ0jgj21YK0atXYYqM8g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAXsflioRdqS8BtvicnXx5hWMTeOEurrl4or108Cd8kZgZgjK3HqGS1QXMawFG8U5A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4a2045f7-2e0e-4a1b-ae5e-1551843f86f7",
+                            SecurityStamp = "4d6e052f-ba26-4bbd-bf80-235b09d3a342",
                             TwoFactorEnabled = false,
                             UserName = "sofia@example.com"
                         });
@@ -380,7 +380,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 4, 19, 56, 9, 645, DateTimeKind.Utc).AddTicks(7978),
+                            CreatedAt = new DateTime(2025, 6, 5, 14, 30, 5, 520, DateTimeKind.Utc).AddTicks(5162),
                             DelivererId = 1,
                             IsDelivered = false,
                             OrderTakerId = 1,
@@ -390,7 +390,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 3, 19, 56, 9, 645, DateTimeKind.Utc).AddTicks(7986),
+                            CreatedAt = new DateTime(2025, 6, 4, 14, 30, 5, 520, DateTimeKind.Utc).AddTicks(5178),
                             DelivererId = 3,
                             IsDelivered = true,
                             OrderTakerId = 2,
@@ -400,7 +400,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 1, 19, 56, 9, 645, DateTimeKind.Utc).AddTicks(7996),
+                            CreatedAt = new DateTime(2025, 6, 2, 14, 30, 5, 520, DateTimeKind.Utc).AddTicks(5187),
                             DelivererId = 4,
                             IsDelivered = true,
                             OrderTakerId = 1,
@@ -410,7 +410,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 5, 25, 19, 56, 9, 645, DateTimeKind.Utc).AddTicks(8054),
+                            CreatedAt = new DateTime(2025, 5, 26, 14, 30, 5, 520, DateTimeKind.Utc).AddTicks(5189),
                             DelivererId = 2,
                             IsDelivered = false,
                             OrderTakerId = 3,
@@ -420,7 +420,7 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 5, 5, 19, 56, 9, 645, DateTimeKind.Utc).AddTicks(8056),
+                            CreatedAt = new DateTime(2025, 5, 6, 14, 30, 5, 520, DateTimeKind.Utc).AddTicks(5191),
                             DelivererId = 1,
                             IsDelivered = true,
                             OrderTakerId = 4,
@@ -620,6 +620,9 @@ namespace ShepherdsPies.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
                     b.HasKey("Id");
 
                     b.ToTable("Sizes");
@@ -628,17 +631,20 @@ namespace ShepherdsPies.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Small"
+                            Name = "Small",
+                            Price = 10.00m
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Medium"
+                            Name = "Medium",
+                            Price = 12.00m
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Large"
+                            Name = "Large",
+                            Price = 15.00m
                         });
                 });
 
